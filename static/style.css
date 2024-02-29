@@ -2,7 +2,43 @@ body{
     background-color: rgb(178, 163, 163);
     background-image: url('');
 }
-.text{
+h1{
     text-align: center;
-    color: black;
+    color: rgb(28, 13, 13);
+}
+
+.button-container{
+    text-align: center;
+}
+
+
+.button1{
+    
+    background-color: rgb(87, 158, 235);
+    border-radius: 10%;
+    align-items: center;
+    size: 10%;
+    cursor: pointer;
+    font-size: 20px;
+
+
+}
+
+.button2{
+    background-color:rgb(66, 142, 218);
+    border-radius: 10%;
+    align-content: center;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 20px;
+
+
+}
+.button1:hover{
+    background-color: aliceblue;
+
+}
+
+.button2:hover{
+    background-color: aquamarine;
 }

@@ -21,9 +21,16 @@ cursor=connection.cursor()
 @app.route('/')
 def home():
 
-    return render_template("index.html" , content=" Welcome to Research Paper Repository")
+    return render_template("home.html" , content=" Welcome to Research Paper Repository")
 
 
+@app.route('/user',methods=['GET'])
+def user():
+    return "welcome user"
+
+@app.route('/admin',methods=['GET'])
+def admin():
+    return "welcome admin"
 
 
 
