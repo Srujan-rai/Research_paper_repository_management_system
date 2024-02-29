@@ -7,8 +7,9 @@
       font-family: Arial, sans-serif;
       background-color: #eee;
     }
-    h1{
-        
+
+    h1 {
+      text-align: center;
     }
 
     form {
@@ -16,6 +17,7 @@
       margin: 0 auto;
       padding: 20px;
       border: 1px solid #ccc;
+      margin-bottom: 20px;
     }
 
     input {
@@ -23,9 +25,6 @@
       padding: 10px;
       margin-bottom: 10px;
       border: 1px solid #ccc;
-    }
-    h1{
-        text-align:center;
     }
 
     button {
@@ -36,6 +35,10 @@
       margin-bottom: 10px;
       border: none;
       cursor: pointer;
+    }
+
+    .create-user-form {
+      display: none;
     }
 
     .error {
@@ -50,5 +53,20 @@
     <input type="password" name="password" placeholder="Password">
     <button type="submit">Login</button>
   </form>
+
+  <h1>Create New User</h1>
+  <button onclick="toggleCreateUserForm()">Create New User</button>
+  <form class="create-user-form" action="/create_user" method="post">
+    <input type="text" name="new_username" placeholder="New Username">
+    <input type="password" name="new_password" placeholder="New Password">
+    <button type="submit">Create User</button>
+  </form>
+
+  <script>
+    function toggleCreateUserForm() {
+      var createUserForm = document.querySelector('.create-user-form');
+      createUserForm.style.display = (createUserForm.style.display === 'none') ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
