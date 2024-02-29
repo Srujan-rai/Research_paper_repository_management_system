@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask,render_template,redirect
+from flask import Flask,render_template,redirect,url_for
 from mysql.connector import Error
 app=Flask(__name__)
 db={
@@ -17,6 +17,11 @@ except Error as e:
     print('error',e)
     
 cursor=connection.cursor()
+
+@app.route('/')
+def home():
+
+    return render_template("index.html" , content=" Welcome to Research Paper Repository")
 
 
 

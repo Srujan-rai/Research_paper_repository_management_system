@@ -1,0 +1,8 @@
+body{
+    background-color: rgb(178, 163, 163);
+    background-image: url('');
+}
+.text{
+    text-align: center;
+    color: black;
+}
