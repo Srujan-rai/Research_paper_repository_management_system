@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eee;
+    }
+    h1{
+        
+    }
+
+    form {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+    h1{
+        text-align:center;
+    }
+
+    button {
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Login</h1>
+  <form action="/login" method="post">
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit">Login</button>
+  </form>
+</body>
+</html>
