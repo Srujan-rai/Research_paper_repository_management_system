@@ -34,11 +34,25 @@ h1{
 
 
 }
+.button3{
+    background-color:rgb(66, 142, 218);
+    border-radius: 10%;
+    align-content: center;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 20px;
+
+
+}
 .button1:hover{
     background-color: aliceblue;
 
 }
 
 .button2:hover{
+    background-color: aquamarine;
+}
+
+.button3:hover{
     background-color: aquamarine;
 }

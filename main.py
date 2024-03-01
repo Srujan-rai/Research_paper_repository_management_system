@@ -25,6 +25,11 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS users
                 password VARCHAR(255))''')
 
 @app.route('/')
+def login_redirect():
+    return redirect(url_for("login"))
+
+
+@app.route('/home')
 def home():
     return render_template("home.html", content="Welcome to Research Paper Repository")
 
@@ -45,7 +50,11 @@ def login():
             return render_template('login.html', message='Invalid username')
 
     return render_template("login.html")
-
+"""
+@app.route('/create_user', methods=["GET"])
+def create_user_page():
+    return render_template('create_user.html')
+"""
 @app.route('/create_user', methods=["POST"])
 def create_user():
     if request.method == "POST":
@@ -58,7 +67,7 @@ def create_user():
             connection.commit()
             return redirect(url_for('login'))  
         except mysql.connector.IntegrityError:
-            return render_template('login.html', message='Username already exists')
+            return render_template('create_user.html', message='Username already exists')
 
 
 if __name__ == "__main__":
