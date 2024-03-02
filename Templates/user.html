@@ -1,79 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/user.css')}}">
-</head>
-<body>
-    <h1>{{content}}</h1>
-    <div class="container">
-        <h3>Select an Option</h3>
-        <form id="optionForm" action="/user" method="POST">
-            <div class="form-group">
-                <label for="options">Choose a department:</label>
-                <select id="options" name="selected_option">
-                    <option value="AIML">AIML</option>
-                    <option value="CSE">CSE</option>
-                    <option value="ISE">ISE</option>
-                    <option value="EC">EC</option>
-                    <option value="MECH">MECH</option>
-                </select>
-                <input type="radio" id="option1" name="radio1" value="Option 1">
-                <label for="option1">Option 1</label><br>
-                
-                <input type="radio" id="option2" name="radio2" value="Option 2">
-                <label for="option2">Option 2</label><br>
-                
-                <input type="radio" id="option3" name="radio3" value="Option 3">
-                <label for="option3">Option 3</label><br>
-                
-                <input type="radio" id="option4" name="radio4" value="Option 4">
-                <label for="option4">Option 4</label><br>
-                
-                <input type="radio" id="option5" name="radio5" value="Option 5">
-                <label for="option5">Option 5</label><br>
-                
-                <input type="radio" id="option6" name="radio6" value="Option 6">
-                <label for="option6">Option 6</label><br>
-            </div>
-            <button type="button" onclick="submitForm()">Submit</button>
-        </form>
-    </div>
-    <h1>{{message}}</h1>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/user.css')}}">
+    </head>
+    <body>
+        <h1>{{content}}
+            <div class="container">
+                <h3>Select an Option</h3>
+                <form action="/user" method="POST">
+                  <div class="form-group">
+                    <label for="options">Choose a department:</label>
+                    <select id="options" name="selected_option">
+                      <option value="AIML">AIML</option>
+                      <option value="CSE">CSE</option>
+                      <option value="ISE">ISE</option>
+                      <option value="EC">EC</option>
+                      <option value="MECH">MECH</option>
+                        
+                    </select>
+                  </div>
+                  <button type="submit">Submit</button>
+                </form>
+              </div>
+              <h1>{{message}}</h1>
+        
 
-    <script>
-        function submitForm() {
-            var selectedOption = document.getElementById("options").value;
-            var radioValue = '';
-
-            if (document.getElementById("option1").checked) {
-                radioValue = document.getElementById("option1").value;
-            } else if (document.getElementById("option2").checked) {
-                radioValue = document.getElementById("option2").value;
-            } else if (document.getElementById("option3").checked) {
-                radioValue = document.getElementById("option3").value;
-            } else if (document.getElementById("option4").checked) {
-                radioValue = document.getElementById("option4").value;
-            } else if (document.getElementById("option5").checked) {
-                radioValue = document.getElementById("option5").value;
-            } else if (document.getElementById("option6").checked) {
-                radioValue = document.getElementById("option6").value;
-            }
-
-            var hiddenInput = document.createElement("input");
-            hiddenInput.setAttribute("type", "hidden");
-            hiddenInput.setAttribute("name", "radio_value");
-            hiddenInput.setAttribute("value", radioValue);
-
-            document.getElementById("optionForm").appendChild(hiddenInput);
-
-
-            document.getElementById("optionForm").submit();
-        }
-    </script>
-</body>
+    </body>
 </html>
