@@ -50,24 +50,48 @@ def login():
             return render_template('login.html', message='Invalid username')
 
     return render_template("login.html")
-"""
-@app.route('/create_user', methods=["GET"])
-def create_user_page():
-    return render_template('create_user.html')
-"""
+
+
 @app.route('/create_user', methods=["POST"])
 def create_user():
     if request.method == "POST":
-        new_username = request.form["new_username"]
-        new_password = request.form["new_password"]
-        hashed_password = hashlib.sha256(new_password.encode()).hexdigest()
+        if 'new_username' in request.form and 'new_password' in request.form: 
+            new_username = request.form["new_username"]
+            new_password = request.form["new_password"]
+            hashed_password = hashlib.sha256(new_password.encode()).hexdigest()
 
-        try:
-            cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (new_username, hashed_password))
-            connection.commit()
-            return redirect(url_for('login'))  
-        except mysql.connector.IntegrityError:
-            return render_template('create_user.html', message='Username already exists')
+            try:
+                cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (new_username, hashed_password))
+                connection.commit()
+                return redirect(url_for('login'))  
+            except mysql.connector.IntegrityError:
+                return render_template('create_user.html', message='Username already exists')
+        else:
+            return render_template('create_user.html')
+        
+        
+        
+@app.route('/admin',methods=['GET','POST'])
+def admin():
+    return render_template("admin.html",content="welcome to the admin")
+
+@app.route('/user',methods=['GET','POST'])
+def user():
+    if request.method =="POST":
+        department=request.form["selected_option"]
+        print(department)
+        return render_template("user.html",content=department)
+    else:
+        return render_template("user.html",content='input not found')
+
+
+department_id={
+    "AIML":0,
+    "CSE":1,
+    "ISE":2,
+    "EC":3,
+    "MECH":4
+}
 
 
 if __name__ == "__main__":

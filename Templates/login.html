@@ -56,8 +56,19 @@
 
 
 
-  <script>
 
-  </script>
+    <script>
+
+      function displayPopup(message) {
+        alert(message);
+      }
+  
+
+      var errorMessage = "{{ message }}";
+      if (errorMessage) {
+        displayPopup(errorMessage);
+      }
+    </script>
+ 
 </body>
 </html>

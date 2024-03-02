@@ -1,0 +1,35 @@
+<!DOCTYPE>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static',filename='CSS/user.css')}}">
+    </head>
+    <body>
+        <h1>{{content}}
+            <div class="container">
+                <h3>Select an Option</h3>
+                <form action="/user" method="POST">
+                  <div class="form-group">
+                    <label for="options">Choose a department:</label>
+                    <select id="options" name="selected_option">
+                      <option value="AIML">AIML</option>
+                      <option value="CSE">CSE</option>
+                      <option value="ISE">ISE</option>
+                      <option value="EC">EC</option>
+                      <option value="MECH">MECH</option>
+                        
+                    </select>
+                  </div>
+                  <button type="submit">Submit</button>
+                </form>
+              </div>
+              <h1>{{message}}</h1>
+        
+
+    </body>
+</html>
