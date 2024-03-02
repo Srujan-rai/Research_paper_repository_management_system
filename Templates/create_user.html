@@ -5,36 +5,79 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #eee;
+      background-color: #202020;
+      color: #ffffff;
+      margin:0;
     }
+
+    h2{
+      text-align: center;
+      background-color: #000051;
+      margin: 0;
+      width: max-screen;
+      position: relative;
+      top: 0;
+      padding: 20px;
+  }
 
     h1 {
       text-align: center;
+      font-size: 25px;
     }
 
     form {
-      width: 300px;
+      background: #282828;
+      width: max-content;
+      height: max-content;
       margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
+      padding: 50px; 
+      margin-top: 10%;
+      padding-bottom: 30px;
+      padding-top:10px;
+      box-shadow: 0px 0px 3px #a0a0a0;
       margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      align-items: center;
+      border-radius: 10px;
+      transition: 0.2s
+    }
+
+    form:hover{
+      box-shadow: 0px 0px 4px #a0a0a0;
     }
 
     input {
       width: 100%;
       padding: 10px;
       margin-bottom: 10px;
-      border: 1px solid #ccc;
+      background: none;
+      border: none;
+      color:#c0c0c0;
+      outline: none;
+      border:solid 1px #606060;
+      border-radius: 3px; 
+    }
+
+    input::placeholder{
+      
+      color: #c0c0c0;
     }
 
     button {
-      width: 100%;
-      background-color: #000;
+      width: 50%;
+      border-radius: 5px;
+      background-color: #000099;
       color: #fff;
       padding: 10px;
       margin-bottom: 10px;
-      border: none;
+      border: solid 1px #000066;
       cursor: pointer;
+      transition: 0.1s;
+    }
+    button:hover{
+      background-color: #0000a1;
     }
 
     .create-user-form {
@@ -47,8 +90,9 @@
   </style>
 </head>
 <body>
-  <h1>create_user</h1>
+  <h2>Research Paper Repository</h2>
   <form action="/create_user" method="post">
+  <h1>Create user</h1>
     <input type="text" name="new_username" placeholder="Enter Username">
     <input type="password" name="new_password" placeholder="Enter Password">
     <button class="button3" type="submit">Create User</button>
