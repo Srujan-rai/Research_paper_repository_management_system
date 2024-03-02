@@ -1,58 +1,40 @@
 body{
-    background-color: rgb(178, 163, 163);
+    background-color: #202020;
     background-image: url('');
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    margin: 0;
 }
-h1{
+h2{
     text-align: center;
-    color: rgb(28, 13, 13);
+    background-color: #000051;
+    margin: 0;
+    width: max-screen;
+    position: relative;
+    top: 0;
+    padding: 20px;
+    margin-bottom: 100px;
 }
 
 .button-container{
-    text-align: center;
-}
-
-
-.button1{
-    
-    background-color: rgb(87, 158, 235);
-    border-radius: 10%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
     align-items: center;
-    size: 10%;
+}
+
+button {
+    width: 200px;
+    border-radius: 25px;
+    background-color: #000099;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: solid 1px #000066;
     cursor: pointer;
-    font-size: 20px;
-
-
-}
-
-.button2{
-    background-color:rgb(66, 142, 218);
-    border-radius: 10%;
-    align-content: center;
-    margin: 4px 2px;
-    cursor: pointer;
-    font-size: 20px;
-
-
-}
-.button3{
-    background-color:rgb(66, 142, 218);
-    border-radius: 10%;
-    align-content: center;
-    margin: 4px 2px;
-    cursor: pointer;
-    font-size: 20px;
-
-
-}
-.button1:hover{
-    background-color: aliceblue;
-
-}
-
-.button2:hover{
-    background-color: aquamarine;
-}
-
-.button3:hover{
-    background-color: aquamarine;
-}
+    transition: 0.1s;
+    font-size: 18px;
+  }
+  button:hover{
+    background-color: #0000a1;
+  }

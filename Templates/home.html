@@ -7,10 +7,10 @@
         <title>Information repository</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{url_for('static',filename='CSS/style.css')}}">
+        <link rel="stylesheet" href="../static/CSS/style.css">
     </head>
     <body>
-        <h1>{{content}}</h1>
+        <h2>Research Paper Repository</h2>
     <div class=button-container>
         <form action="/user" method="GET">
             <button class= "button1"type="submit">User</button>
@@ -19,7 +19,7 @@
             <button class="button2" type="submit">Admin</button>
         </form>
         <form action="/create_user" method="post">
-            <button class="button3" type="submit">create_user</button>
+            <button class="button3" type="submit">Create User</button>
         </form>
     </div>
         <script src="" async defer></script>
