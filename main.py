@@ -24,7 +24,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS users
                 username VARCHAR(255) UNIQUE,
                 password VARCHAR(255))''')
 
-@app.route('/')
+@app.route('/') 
 def login_redirect():
     return redirect(url_for("login"))
 
@@ -79,9 +79,16 @@ def admin():
 def user():
     if request.method =="POST":
         department=request.form["selected_option"]
-        cursor.execute("")
-        print(department)
+
+        option_1 = request.form.get("radio1")
+        option_2 = request.form.get("radio2")
+        option_3 = request.form.get("radio3")
+        option_4 = request.form.get("radio4")
+        option_5 = request.form.get("radio5")
+        option_6 = request.form.get("radio6")
+        print(option_1,option_2,option_3,option_4,option_5,option_6)
         return render_template("user.html",content=department)
+    
     else:
         return render_template("user.html",content='input not found')
 
