@@ -79,6 +79,7 @@ def admin():
 def user():
     if request.method =="POST":
         department=request.form["selected_option"]
+        cursor.execute("")
         print(department)
         return render_template("user.html",content=department)
     else:
