@@ -7,20 +7,20 @@ body{
 }
 h2{
     text-align: center;
-    background-color: #000051;
     margin: 0;
     width: max-screen;
     position: relative;
-    top: 0;
+    top: 20px;
     padding: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 250px;
+    font-size: 30px;
 }
 
 .button-container{
     display: flex;
-    flex-direction: column;
-    row-gap: 50px;
     align-items: center;
+    column-gap: 50px;
+    justify-content: center;
 }
 
 button {
