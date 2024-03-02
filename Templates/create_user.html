@@ -54,5 +54,20 @@
     <button class="button3" type="submit">Create User</button>
 </form>
 
+
+
+<script>
+
+  function displayPopup(message) {
+    alert(message);
+  }
+
+
+  var errorMessage = "{{ message }}";
+  if (errorMessage) {
+    displayPopup(errorMessage);
+  }
+</script>
 </body>
+
 </html>
