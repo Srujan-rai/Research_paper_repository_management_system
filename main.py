@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request,jsonify
 import hashlib
 
 app = Flask(__name__)
@@ -29,9 +29,7 @@ def login_redirect():
     return redirect(url_for("login"))
 
 
-@app.route('/home')
-def home():
-    return render_template("home.html", content="Welcome to Research Paper Repository")
+
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -43,7 +41,7 @@ def login():
 
         if user:
             if hashlib.sha256(password.encode()).hexdigest() == user[0]:
-                return redirect(url_for('home'))
+                return render_template("home.html")
             else:
                 return render_template('login.html', message='Invalid password')
         else:
@@ -78,19 +76,20 @@ def admin():
 @app.route('/user',methods=['GET','POST'])
 def user():
     if request.method =="POST":
-        department=request.form["selected_option"]
+        department = request.form['department']
+        selected_options = request.form.getlist('selected_options[]')
+        option_texts = {option: request.form.get(option) for option in selected_options}
 
-        option_1 = request.form.get("radio1")
-        option_2 = request.form.get("radio2")
-        option_3 = request.form.get("radio3")
-        option_4 = request.form.get("radio4")
-        option_5 = request.form.get("radio5")
-        option_6 = request.form.get("radio6")
-        print(option_1,option_2,option_3,option_4,option_5,option_6)
+        print('Department:', department)
+        print('Selected Options:', selected_options)
+        print('Option Texts:', option_texts)
+
+        
         return render_template("user.html",content=department)
     
     else:
         return render_template("user.html",content='input not found')
+
 
 
 department_id={

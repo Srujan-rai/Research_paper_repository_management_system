@@ -1,34 +1,108 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{url_for('static',filename='CSS/user.css')}}">
-    </head>
-    <body>
-        <h1>{{content}}
-            <div class="container">
-                <h3>Select an Option</h3>
-                <form action="/user" method="POST">
-                  <div class="form-group">
-                    <label for="options">Choose a department:</label>
-                    <select id="options" name="selected_option">
-                      <option value="AIML">AIML</option>
-                      <option value="CSE">CSE</option>
-                      <option value="ISE">ISE</option>
-                      <option value="EC">EC</option>
-                      <option value="MECH">MECH</option>
-                        
-                    </select>
-                  </div>
-                  <button type="submit">Submit</button>
-                </form>
-              </div>
-              <h1>{{message}}</h1>
-        
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/user.css')}}">
+</head>
+<body>
+    <h1>{{content}}</h1>
+    <div class="container">
+        <h3>Select Options</h3>
+        <form action="/user" method="POST" id="optionForm">
+            <div class="form-group">
+                <label for="departments">Choose a department:</label>
+                <select id="departments" name="department">
+                    <option value="AIML">AIML</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ISE">ISE</option>
+                    <option value="EC">EC</option>
+                    <option value="MECH">MECH</option>
+                </select>
+            </div>
 
-    </body>
+            <div class="form-group">
+                <label for="options">Choose options:</label>
+                <select id="options" name="selected_options[]" multiple>
+                    <option value="Journal">Journal</option>
+                    <option value="Conference">Conference</option>
+                    <option value="BookChapter">Book Chapter</option>
+                    <option value="FundedResearchProject">Funded Research Project</option>
+                    <option value="ResearchProposalSubmitted">Research Proposal Submitted</option>
+                    <option value="Consultancy">Consultancy</option>
+                    <option value="ProductDevelopment">Product Development</option>
+                    <option value="Patent">Patent</option>
+                    <option value="FDPWorkshopSeminarAttendedByFaculty">FDP/Workshop/Seminar Attended by Faculty</option>
+                    <option value="MOUCS">MOUCS / Swayam / Coursera any other certification courses</option>
+                    <option value="AchievementsAndAwards">Achievements and Awards</option>
+                    <option value="MOUS">MOUS</option>
+                    <option value="FundedStudentProject">Funded Student Project</option>
+                </select>
+            </div>
+
+            <div id="textFields">
+                <!-- Text fields will be added dynamically -->
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <script>
+        document.getElementById('options').addEventListener('change', function() {
+            var selectedOptions = this.selectedOptions;
+            var textFields = document.getElementById('textFields');
+            textFields.innerHTML = ''; // Clear previous text fields
+
+            // Add text fields for each selected option
+            for (var i = 0; i < selectedOptions.length; i++) {
+                var option = selectedOptions[i].value;
+                var optionFields = getOptionFields(option);
+                textFields.appendChild(optionFields);
+            }
+        });
+
+        function getOptionFields(option) {
+            var optionFields = document.createElement('div');
+            optionFields.classList.add('form-group');
+
+            var optionData = {
+                'Journal': ['Authors', 'Year of publication', 'Title', 'Journal name', 'Volume and page number', 'ISSN', 'Impact factor'],
+                'Conference': ['Year of publication', 'Author', 'Title', 'Conference Name', 'Volume and page count', 'Organized by', 'Place of conference'],
+                'BookChapter': ['Year of publication', 'Author', 'Chapter title', 'Book title', 'Publisher', 'ISSN'],
+                'FundedResearchProject': ['Year sanctioned', 'Principal investigation', 'COPI', 'Title of the project', 'Funding Agencies', 'Amount RS', 'Status'],
+                'ResearchProposalSubmitted': ['Date of sanction', 'Principal investigation', 'COPI', 'Title', 'Funding Agencies', 'Amount applied', 'Status'],
+                'Consultancy': ['Amount Sanctioned', 'Principal investigation', 'COPI', 'Title', 'Agency', 'Year', 'Type'],
+                'ProductDevelopment': ['Product Type', 'Product Description', 'Area of application', 'Sponsoring/Funding agency', 'Faculty Name/Mentor name', 'Student name', 'Status'],
+                'Patent': ['Year of publication', 'Principal investigation', 'Patent number', 'Title', 'Indian/international', 'Status'],
+                'FDPWorkshopSeminarAttendedByFaculty': ['Date', 'Topic', 'Duration', 'Dept', 'Coordination', 'Organizer', 'Faculty Name'],
+                'MOUCS': ['Date', 'Major area', 'Topic', 'Duration', 'Certified by', 'Faculty Name/USN', 'Student Name/USN'],
+                'AchievementsAndAwards': ['Date', 'Event name', 'Organizer', 'Mentor name', 'Names of the faculty', 'Type of participation', 'Outcomes'],
+                'MOUS': ['Date', 'Duration', 'Name of the organization', 'Type of MOU', 'Outcomes', 'Faculty incharge'],
+                'FundedStudentProject': ['Year sanctioned', 'Supervison', 'Cosupervision', 'Student Name', 'Title of the project', 'Funding Agencies', 'Amount', 'Status']
+            };
+
+            var fields = optionData[option];
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                var label = document.createElement('label');
+                label.textContent = field + ': ';
+                optionFields.appendChild(label);
+
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.name = option + '-' + field;
+                optionFields.appendChild(input);
+
+                optionFields.appendChild(document.createElement('br'));
+            }
+
+            return optionFields;
+        }
+    </script>
+</body>
 </html>
