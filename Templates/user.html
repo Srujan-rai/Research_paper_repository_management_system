@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/user.css')}}">
 </head>
 <body>
-    <h1>{{content}}</h1>
+
     <div class="container">
         <h3>Select Options</h3>
         <form action="/user" method="POST" id="optionForm">
@@ -44,7 +44,7 @@
             </div>
 
             <div id="textFields">
-                <!-- Text fields will be added dynamically -->
+ 
             </div>
 
             <button type="submit">Submit</button>
@@ -56,24 +56,24 @@
         document.getElementById('options').addEventListener('change', function() {
             var selectedOptions = this.selectedOptions;
             var textFields = document.getElementById('textFields');
-            textFields.innerHTML = ''; // Clear previous text fields
+            textFields.innerHTML = ''; 
 
-            // Add text fields for each selected option
             for (var i = 0; i < selectedOptions.length; i++) {
                 var option = selectedOptions[i].value;
                 var optionFields = getOptionFields(option);
                 textFields.appendChild(optionFields);
             }
+            
         });
-
+    
         function getOptionFields(option) {
             var optionFields = document.createElement('div');
             optionFields.classList.add('form-group');
-
+    
             var optionData = {
                 'Journal': ['Authors', 'Year of publication', 'Title', 'Journal name', 'Volume and page number', 'ISSN', 'Impact factor'],
-                'Conference': ['Year of publication', 'Author', 'Title', 'Conference Name', 'Volume and page count', 'Organized by', 'Place of conference'],
-                'BookChapter': ['Year of publication', 'Author', 'Chapter title', 'Book title', 'Publisher', 'ISSN'],
+                'Conference': ['Year of publication', 'Authors', 'Title', 'Conference Name', 'Volume and page count', 'Organized by', 'Place of conference'],
+                'BookChapter': ['Year of publication', 'Authors', 'Chapter title', 'Book title', 'Publisher', 'ISSN'],
                 'FundedResearchProject': ['Year sanctioned', 'Principal investigation', 'COPI', 'Title of the project', 'Funding Agencies', 'Amount RS', 'Status'],
                 'ResearchProposalSubmitted': ['Date of sanction', 'Principal investigation', 'COPI', 'Title', 'Funding Agencies', 'Amount applied', 'Status'],
                 'Consultancy': ['Amount Sanctioned', 'Principal investigation', 'COPI', 'Title', 'Agency', 'Year', 'Type'],
@@ -85,24 +85,53 @@
                 'MOUS': ['Date', 'Duration', 'Name of the organization', 'Type of MOU', 'Outcomes', 'Faculty incharge'],
                 'FundedStudentProject': ['Year sanctioned', 'Supervison', 'Cosupervision', 'Student Name', 'Title of the project', 'Funding Agencies', 'Amount', 'Status']
             };
-
+    
             var fields = optionData[option];
             for (var i = 0; i < fields.length; i++) {
                 var field = fields[i];
                 var label = document.createElement('label');
                 label.textContent = field + ': ';
                 optionFields.appendChild(label);
-
-                var input = document.createElement('input');
-                input.type = 'text';
-                input.name = option + '-' + field;
-                optionFields.appendChild(input);
-
+    
+                if (field === 'Authors') {
+                    var select = document.createElement('select');
+                    select.name = option + '-' + field;
+                    var authors = ['Author 1', 'Author 2', 'Author 3'];
+                    for (var j = 0; j < authors.length; j++) {
+                        var option = document.createElement('option');
+                        option.value = authors[j];
+                        option.textContent = authors[j];
+                        select.appendChild(option);
+                    }
+                    optionFields.appendChild(select);
+                } 
+                else if (field === 'Year of publication' || field === 'Year sanctioned') {
+                    var selectYear = document.createElement('select');
+                    selectYear.name = option + '-' + field;
+                    var currentYear = new Date().getFullYear();
+                    for (var year = currentYear; year >= 1900; year--) {
+                        var optionYear = document.createElement('option');
+                        optionYear.value = year;
+                        optionYear.textContent = year;
+                        selectYear.appendChild(optionYear);
+                    }
+                    optionFields.appendChild(selectYear);
+                }
+                else {
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = option + '-' + field;
+                    optionFields.appendChild(input);
+                }
+    
                 optionFields.appendChild(document.createElement('br'));
             }
-
+    
             return optionFields;
+
+
         }
     </script>
+    
 </body>
 </html>

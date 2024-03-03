@@ -29,7 +29,7 @@ def login_redirect():
     return redirect(url_for("login"))
 
 
-
+    
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -75,23 +75,30 @@ def admin():
 
 @app.route('/user',methods=['GET','POST'])
 def user():
-    if request.method =="POST":
+    if request.method == "POST":
         department = request.form['department']
         selected_options = request.form.getlist('selected_options[]')
         option_texts = {option: request.form.get(option) for option in selected_options}
 
+        entered_values = {}
+        for option in selected_options:
+            entered_values[option] = {}
+            for field in request.form:
+                if field.startswith(option + '-'):
+                    field_name = field.split('-', 1)[1]
+                    entered_values[option][field_name] = request.form[field]
+
         print('Department:', department)
         print('Selected Options:', selected_options)
         print('Option Texts:', option_texts)
+        print('Entered Values:', entered_values)
 
-        
-        return render_template("user.html",content=department)
-    
+        return render_template("user.html", message='')
+
     else:
-        return render_template("user.html",content='input not found')
-
-
-
+        return render_template("user.html", message='input not found')
+    
+    
 department_id={
     "AIML":0,
     "CSE":1,
