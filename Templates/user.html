@@ -44,7 +44,7 @@
             </div>
 
             <div id="textFields">
-                <!-- Text fields will be added dynamically -->
+                <!-- Text fields will be added dynamically from javasrcipt -->
             </div>
 
             <button type="submit">Submit</button>
@@ -97,7 +97,7 @@
                 if (field === 'Authors') {
                     var select = document.createElement('select');
                     select.name = option + '-' + field;
-                    var authors = ['Author 1', 'Author 2', 'Author 3']; // Example authors, replace with your list
+                    var authors = ['Author 1', 'Author 2', 'Author 3']; 
                     for (var j = 0; j < authors.length; j++) {
                         var option = document.createElement('option');
                         option.value = authors[j];
@@ -134,12 +134,11 @@
             alert("Information inserted successfully!");
         }
 
-        // Add an event listener to the form submission
         document.getElementById('optionForm').addEventListener('submit', function(event) {
-            // Prevent default form submission
+
             event.preventDefault();
             
-            // Call the displayAlert function
+ 
             displayAlert();
 
             // Submit the form
