@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/user.css')}}">
 </head>
 <body>
-
+    <h1>{{content}}</h1>
     <div class="container">
         <h3>Select Options</h3>
         <form action="/user" method="POST" id="optionForm">
@@ -44,7 +44,7 @@
             </div>
 
             <div id="textFields">
- 
+                <!-- Text fields will be added dynamically -->
             </div>
 
             <button type="submit">Submit</button>
@@ -56,8 +56,9 @@
         document.getElementById('options').addEventListener('change', function() {
             var selectedOptions = this.selectedOptions;
             var textFields = document.getElementById('textFields');
-            textFields.innerHTML = ''; 
-
+            textFields.innerHTML = ''; // Clear previous text fields
+    
+            // Add text fields for each selected option
             for (var i = 0; i < selectedOptions.length; i++) {
                 var option = selectedOptions[i].value;
                 var optionFields = getOptionFields(option);
@@ -71,7 +72,7 @@
             optionFields.classList.add('form-group');
     
             var optionData = {
-                'Journal': ['Authors', 'Year of publication', 'Title', 'Journal name', 'Volume and page number', 'ISSN', 'Impact factor'],
+                'Journal': ['Year of publication', 'Authors', 'Title', 'Journal name', 'Volume and page number', 'ISSN', 'Impact factor'],
                 'Conference': ['Year of publication', 'Authors', 'Title', 'Conference Name', 'Volume and page count', 'Organized by', 'Place of conference'],
                 'BookChapter': ['Year of publication', 'Authors', 'Chapter title', 'Book title', 'Publisher', 'ISSN'],
                 'FundedResearchProject': ['Year sanctioned', 'Principal investigation', 'COPI', 'Title of the project', 'Funding Agencies', 'Amount RS', 'Status'],
@@ -96,7 +97,7 @@
                 if (field === 'Authors') {
                     var select = document.createElement('select');
                     select.name = option + '-' + field;
-                    var authors = ['Author 1', 'Author 2', 'Author 3'];
+                    var authors = ['Author 1', 'Author 2', 'Author 3']; // Example authors, replace with your list
                     for (var j = 0; j < authors.length; j++) {
                         var option = document.createElement('option');
                         option.value = authors[j];
@@ -128,9 +129,23 @@
             }
     
             return optionFields;
-
-
         }
+        function displayAlert() {
+            alert("Information inserted successfully!");
+        }
+
+        // Add an event listener to the form submission
+        document.getElementById('optionForm').addEventListener('submit', function(event) {
+            // Prevent default form submission
+            event.preventDefault();
+            
+            // Call the displayAlert function
+            displayAlert();
+
+            // Submit the form
+            this.submit();
+        });
+     
     </script>
     
 </body>

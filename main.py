@@ -2,6 +2,14 @@ import mysql.connector
 from flask import Flask, render_template, redirect, url_for, request,jsonify
 import hashlib
 
+department_id={
+    "AIML":0,
+    "CSE":1,
+    "ISE":2,
+    "EC":3,
+    "MECH":4
+}
+
 app = Flask(__name__)
 db = {
     'host': 'localhost',
@@ -93,19 +101,33 @@ def user():
         print('Option Texts:', option_texts)
         print('Entered Values:', entered_values)
 
+        if 'Patent' in selected_options:
+            patent_data = entered_values['Patent']
+            # Get department ID based on department name
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                # Assuming you have a table named 'patents' with appropriate columns
+                insert_statement = "INSERT INTO PATENT (DEPARTMENT_ID, YEAR_OF_PUBLICATION, PRINCIPAL_INVESTIGATION, PATENT_NUMBER, TITLE, INDIAN_INTERNATIONAL, STATUS) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                # Extract data from entered_values and execute the insert statement
+                data = (
+                    department_id_value,
+                    patent_data['Year of publication'],
+                    patent_data['Principal investigation'],
+                    patent_data['Patent number'],
+                    patent_data['Title'],
+                    patent_data['Indian/international'],
+                    patent_data['Status']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+            else:
+                print("Department ID not found for department:", department)
+
         return render_template("user.html", message='')
 
     else:
-        return render_template("user.html", message='input not found')
-    
-    
-department_id={
-    "AIML":0,
-    "CSE":1,
-    "ISE":2,
-    "EC":3,
-    "MECH":4
-}
+        return render_template("user.html", message='Input not found')
 
 
 if __name__ == "__main__":
