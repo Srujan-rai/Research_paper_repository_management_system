@@ -103,12 +103,12 @@ def user():
 
         if 'Patent' in selected_options:
             patent_data = entered_values['Patent']
-            # Get department ID based on department name
+            
             department_id_value = department_id.get(department, None)
             if department_id_value is not None:
-                # Assuming you have a table named 'patents' with appropriate columns
+                
                 insert_statement = "INSERT INTO PATENT (DEPARTMENT_ID, YEAR_OF_PUBLICATION, PRINCIPAL_INVESTIGATION, PATENT_NUMBER, TITLE, INDIAN_INTERNATIONAL, STATUS) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-                # Extract data from entered_values and execute the insert statement
+                
                 data = (
                     department_id_value,
                     patent_data['Year of publication'],
@@ -124,10 +124,25 @@ def user():
             else:
                 print("Department ID not found for department:", department)
 
-        return render_template("user.html", message='')
+        return render_template("user.html", message='hi hello')
+    
+    
+        
+    
+    
 
     else:
         return render_template("user.html", message='Input not found')
+
+
+@app.route('/landing_page',methods=['GET','POST'])
+def landing_page():
+    if request.method=="POST":
+      return  redirect(url_for(login))
+    else:
+      return render_template("landing_page.html")
+
+
 
 
 if __name__ == "__main__":
