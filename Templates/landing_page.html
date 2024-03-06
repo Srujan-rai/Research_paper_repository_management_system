@@ -1,25 +1,123 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>DataNest</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <h1>DataNest</h1>
-        <h2>Preserving Academic Contributions, Fueling Intellectual Discovery...</h2>
-            <form action="/login",method="post">
-                <button type="submit">Login</button>
-            </form>
-            <a href="https://github.com/Srujan-rai/Research_paper_repository_management_system.git">
-                <button>Contribute</button>
-            </a
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>DataNest</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #190439;
+        color: #ffffff;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        row-gap: 100px;
+      }
 
-        
-        <script src="" async defer></script>
-    </body>
+      .page-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        padding-left: 100px;
+        padding-right: 90px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        transition: 0.3s;
+      }
+
+      .login-button {
+        background: rgb(63, 94, 251);
+        background: radial-gradient(
+          circle,
+          rgba(63, 94, 251, 1) 0%,
+          rgba(70, 181, 252, 1) 100%
+        );
+        border: none;
+        color: #fff;
+        padding: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: 0.3s;
+      }
+      .login-button:hover {
+        box-shadow: 0px 0px 7px #46b5fc;
+      }
+
+      h1:hover {
+        color: rgb(63, 94, 251);
+        color: radial-gradient(
+          circle,
+          rgba(63, 94, 251, 1) 0%,
+          rgba(70, 181, 252, 1) 100%
+        );
+      }
+
+      p {
+        align-self: center;
+        font-size: 1.5rem;
+      }
+
+      .contribution-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contribute-button {
+        background: rgb(0, 66, 171);
+        background: radial-gradient(
+          circle,
+          rgba(0, 66, 171, 1) 34%,
+          rgba(107, 160, 255, 1) 100%
+        );
+        border: none;
+        color: #fff;
+        padding: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.2s;
+      }
+
+      .contribute-button:hover {
+        border-bottom: solid 1px white;
+        padding: 32px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-heading">
+      <h1>DataNest</h1>
+      <form action="/login" ,method="post">
+        <button type="submit" class="login-button">Login</button>
+      </form>
+    </div>
+    <p>Preserving Academic Contributions, Fueling Intellectual Discovery...</p>
+
+    <div class="contribution-div">
+      <p>Help Us Be Better By Contributing</p>
+      <a
+        href="https://github.com/Srujan-rai/Research_paper_repository_management_system.git"
+      >
+        <button class="contribute-button">Contribute</button>
+      </a>
+    </div>
+
+    <script src="" async defer></script>
+  </body>
 </html>
