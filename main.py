@@ -79,6 +79,7 @@ def create_user():
         
 @app.route('/admin',methods=['GET','POST'])
 def admin():
+    
     return render_template("admin.html",content="welcome to the admin")
 
 @app.route('/user',methods=['GET','POST'])
@@ -121,8 +122,35 @@ def user():
                 cursor.execute(insert_statement, data)
                 connection.commit()
                 print("data entered sucessfully!!! ")
+                
             else:
                 print("Department ID not found for department:", department)
+        
+        
+        if 'FDPWorkshopSeminarAttendedByFaculty' in selected_options:
+            fdp_values=entered_values['FDPWorkshopSeminarAttendedByFaculty']
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                insert_statement="INSERT INTO FDPWORKSHOPSEMINAR(DEPARTMENT_ID,DATE,TOPIC,DURATION,COORDINATION,ORGANIZER,FACULTY_NAME) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                data=(
+                    department_id_value,
+                    fdp_values['Date'],
+                    fdp_values['Topic'],
+                    fdp_values['Duration'],
+                    fdp_values['Coordination'],
+                    fdp_values['Organizer'],
+                    fdp_values['Faculty Name']
+    
+                )
+                try:
+                   cursor.execute(insert_statement,data)
+                   connection.commit()
+                   print("data entered sucessfully")
+                except mysql.connector.Error as e:
+                 print('error', e)
+
+            else:
+                print("Department ID not found for department:", department)            
 
         return render_template("user.html", message='hi hello')
     
