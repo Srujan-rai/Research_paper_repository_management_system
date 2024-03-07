@@ -34,7 +34,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS users
 
 @app.route('/') 
 def login_redirect():
-    return redirect(url_for("login"))
+    return redirect(url_for("landing_page"))
 
 
     
@@ -150,7 +150,67 @@ def user():
                  print('error', e)
 
             else:
-                print("Department ID not found for department:", department)            
+                print("Department ID not found for department:", department) 
+                
+                
+        if 'MOUCS' in selected_options:
+            mou_values=entered_values['MOUCS']
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                insert_statement="INSERT INTO MOUCS (DEPARTMENT_ID, DATE, MAJOR_AREA, TOPIC, DURATION, CERTIFIED_BY, ATTENDED_BY_FACULTY, ATTENDED_BY_STUDENT)VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+                data=(
+                    department_id_value,
+                    mou_values['Date'],
+                    mou_values['Major area'],
+                    mou_values['Topic'],
+                    mou_values['Duration'],
+                    mou_values['Certified by'],
+                    mou_values['Faculty Name/USN'],
+                    mou_values['Student Name/USN']
+    
+                )
+                try:
+                   cursor.execute(insert_statement,data)
+                   connection.commit()
+                   print("data entered sucessfully")
+                except mysql.connector.Error as e:
+                 print('error', e)
+
+            else:
+                print("Department ID not found for department:", department)
+                
+                
+        if 'AchievementsAndAwards' in selected_options:
+            award_values=entered_values['AchievementsAndAwards']
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                insert_statement="INSERT INTO AchievementsAndAwards(DEPARTMENT_ID,DATE,TOPIC,DURATION,COORDINATION,ORGANIZER,FACULTY_NAME) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                data=(
+                    department_id_value,
+                    award_values['Date'],
+                    award_values['Event name'],
+                    award_values['Organizer'],
+                    award_values['Mentor name'],
+                    award_values['Names of the faculty'],
+                    award_values['Type of participation'],
+                    award_values['Outcomes']
+    
+                )
+                try:
+                   cursor.execute(insert_statement,data)
+                   connection.commit()
+                   print("data entered sucessfully")
+                except mysql.connector.Error as e:
+                 print('error', e)
+
+            else:
+                print("Department ID not found for department:", department)    
+                
+          
+          
+          
+          
+                   
 
         return render_template("user.html", message='hi hello')
     
