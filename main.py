@@ -102,6 +102,62 @@ def user():
         print('Option Texts:', option_texts)
         print('Entered Values:', entered_values)
 
+        
+        
+        
+        
+
+        if 'Consultancy' in selected_options:
+            consultancy_data = entered_values['Consultancy']
+            
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                
+                insert_statement = "INSERT INTO CONSULTANCY(DEPARTMENT_ID, AMOUNT_SANCTIONED, PRINCIPAL_INVESTIGATION, COPI, TITLE, AGENCY, YEAR,TYPE) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
+                
+                data = (
+                    department_id_value,
+                    consultancy_data['Amount Sanctioned'],
+                    consultancy_data['Principal investigation'],
+                    consultancy_data['COPI'],
+                    consultancy_data['Title'],
+                    consultancy_data['Agency'],
+                    consultancy_data['Year'],
+                    consultancy_data['Type']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+                
+            else:
+                print("Department ID not found for department:", department)
+        
+        if 'ProductDevelopment' in selected_options:
+            product_data = entered_values['ProductDevelopment']
+            
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                
+                insert_statement = "INSERT INTO PRODUCTDEVELOPMENT(DEPARTMENT_ID, PRODUCT_TYPE, PRODUCT_DESCRIPTION, AREA_OF_APPLICATION, SPONSORING_FUNDING_AGENCY, FACULTY_MENTOR_NAME, STUDENT_NAME,STATUS) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
+                
+                data = (
+                    department_id_value,
+                    product_data['Product Type'],
+                    product_data['Product Description'],
+                    product_data['Area of application'],
+                    product_data['Sponsoring/Funding agency'],
+                    product_data['Faculty Name/Mentor name'],
+                    product_data['Student name'],
+                    product_data['Status']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+                
+            else:
+                print("Department ID not found for department:", department)
+        
+        
         if 'Patent' in selected_options:
             patent_data = entered_values['Patent']
             
