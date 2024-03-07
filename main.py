@@ -184,7 +184,7 @@ def user():
             award_values=entered_values['AchievementsAndAwards']
             department_id_value = department_id.get(department, None)
             if department_id_value is not None:
-                insert_statement="INSERT INTO AchievementsAndAwards(DEPARTMENT_ID,DATE,TOPIC,DURATION,COORDINATION,ORGANIZER,FACULTY_NAME) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                insert_statement="INSERT INTO AchievementsAndAwards(DEPARTMENT_ID,DATE,EVENT_NAME,ORGANIZER,MENTOR_NAME,NAMES_OF_THE_FACULTY,TYPE_OF_PARTICIPATION,OUTCOMES) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
                 data=(
                     department_id_value,
                     award_values['Date'],
@@ -206,9 +206,56 @@ def user():
             else:
                 print("Department ID not found for department:", department)    
                 
+        
+        if 'MOUS' in selected_options:
+            mous_values=entered_values['MOUS']
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                insert_statement="INSERT INTO MOUS(DEPARTMENT_ID,DATE,DURATION,NAME_OF_THE_ORGANIZATION,TYPE_OF_MOU,OUTCOMES,FACULTY_INCHARGE) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                data=(
+                    department_id_value,
+                    mous_values['Date'],
+                    mous_values['Duration'],
+                    mous_values['Name of the organization'],
+                    mous_values['Type of MOU'],
+                    mous_values['Outcomes'],
+                    mous_values['Faculty incharge']
+                    )
+                try:
+                   cursor.execute(insert_statement,data)
+                   connection.commit()
+                   print("data entered sucessfully")
+                except mysql.connector.Error as e:
+                 print('error', e)
+
+            else:
+                print("Department ID not found for department:", department) 
           
-          
-          
+        if 'FundedStudentProject' in selected_options:
+            project_values=entered_values['FundedStudentProject']
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                insert_statement="INSERT INTO FUNDEDSTUDENTPROJECT(DEPARTMENT_ID,YEAR_SANCTIONED,SUPERVISION,COSUPERVISION,STUDENT_NAME,TITLE_OF_THE_PROJECT ,FUNDING_AGENCIES,AMOUNT,STATUS) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                data=(
+                    department_id_value,
+                    project_values['Year sanctioned'],
+                    project_values['Supervison'],
+                    project_values['Cosupervision'],
+                    project_values['Student Name'],
+                    project_values['Title of the project'],
+                    project_values['Funding Agencies'],
+                    project_values['Amount'],
+                    project_values['Status']
+                    )
+                try:
+                   cursor.execute(insert_statement,data)
+                   connection.commit()
+                   print("data entered sucessfully")
+                except mysql.connector.Error as e:
+                 print('error', e)
+
+            else:
+                print("Department ID not found for department:", department) 
           
                    
 
