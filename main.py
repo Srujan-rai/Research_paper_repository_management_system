@@ -101,8 +101,137 @@ def user():
         print('Selected Options:', selected_options)
         print('Option Texts:', option_texts)
         print('Entered Values:', entered_values)
-
         
+        if 'Journal' in selected_options:
+            journal_data = entered_values['Journal']
+            
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                
+                insert_statement = "INSERT INTO JOURNAL(DEPARTMENT_ID, AUTHORS,YEAR_OF_PUBLICATION,TITLE,JOURNAL_NAME, VOLUME_PAGE_NUMBER,ISSN,IMPACT_FACTOR) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
+                
+                data = (
+                    department_id_value,
+                    journal_data['Authors'],
+                    journal_data['Year of publication'],
+                    journal_data['Title'],
+                    journal_data['Journal name'],
+                    journal_data['Volume and page number'],
+                    journal_data['ISSN'],
+                    journal_data['Impact factor']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+                
+            else:
+                print("Department ID not found for department:", department)
+        
+        
+        if 'Conference' in selected_options:
+            conference_data = entered_values['Conference']
+            
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                
+                insert_statement = "INSERT INTO CONFERENCE(DEPARTMENT_ID,YEAR_OF_PUBLICATION,AUTHOR,TITLE,CONFERENCE_NAME,VOLUME_PAGE_COUNT,ORGANIZED_BY,PLACE_OF_CONFERENCE) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
+                
+                data = (
+                    department_id_value,
+                    conference_data['Year of publication'],
+                    conference_data['Authors'],
+                    conference_data['Title'],
+                    conference_data['Conference Name'],
+                    conference_data['Volume and page count'],
+                    conference_data['Organized by'],
+                    conference_data['Place of conference']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+                
+            else:
+                print("Department ID not found for department:", department)
+        
+        
+        
+        if 'BookChapter' in selected_options:
+            BookChapter_data = entered_values['BookChapter']
+            
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                
+                insert_statement = "INSERT INTO BOOKCHAPTER(DEPARTMENT_ID, YEAR_OF_PUBLICATION , AUTHOR,CHAPTER_TITLE, BOOK_TITLE,PUBLISHER,ISSN) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                
+                data = (
+                    department_id_value,
+                    BookChapter_data['Year of publication'],
+                    BookChapter_data['Authors'],
+                    BookChapter_data['Chapter title'],
+                    BookChapter_data['Book title'],
+                    BookChapter_data['Publisher'],
+                    BookChapter_data['ISSN']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+                
+            else:
+                print("Department ID not found for department:", department)
+        
+        if 'FundedResearchProject' in selected_options:
+            fundedresearchproject_data = entered_values['FundedResearchProject']
+            
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                
+                insert_statement = "INSERT INTO FUNDEDRESEARCHPROJECT(DEPARTMENT_ID, YEAR_SANCTIONED, PRINCIPAL_INVESTIGATOR, COPI, PROJECT_TITLE, FUNDING_AGENCIES, AMOUNT_RS,STATUS) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
+                
+                data = (
+                    department_id_value,
+                    fundedresearchproject_data['Year sanctioned'],
+                    fundedresearchproject_data['Principal investigation'],
+                    fundedresearchproject_data['COPI'],
+                    fundedresearchproject_data['Title of the project'],
+                    fundedresearchproject_data['Funding Agencies'],
+                    fundedresearchproject_data['Amount RS'],
+                    fundedresearchproject_data['Status']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+                
+            else:
+                print("Department ID not found for department:", department)
+        
+        
+        
+        
+        
+        if 'ResearchProposalSubmitted' in selected_options:
+            ResearchProposalSubmitted_data = entered_values['ResearchProposalSubmitted']
+            
+            department_id_value = department_id.get(department, None)
+            if department_id_value is not None:
+                
+                insert_statement = "INSERT INTO RESEARCHPROPOSALSUBMITTED(DEPARTMENT_ID, DATE_OF_SANCTION, PRINCIPAL_INVESTIGATOR, COPI, TITLE,FUNDING_AGENCIES, AMOUNT_APPLIED, STATUS) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
+                
+                data = (
+                    department_id_value,
+                    ResearchProposalSubmitted_data['Date of sanction'],
+                    ResearchProposalSubmitted_data['Principal investigation'],
+                    ResearchProposalSubmitted_data['COPI'],
+                    ResearchProposalSubmitted_data['Title'],
+                    ResearchProposalSubmitted_data['Funding Agencies'],
+                    ResearchProposalSubmitted_data['Amount applied'],
+                    ResearchProposalSubmitted_data['Status']
+                )
+                cursor.execute(insert_statement, data)
+                connection.commit()
+                print("data entered sucessfully!!! ")
+                
+            else:
+                print("Department ID not found for department:", department)
         
         
         

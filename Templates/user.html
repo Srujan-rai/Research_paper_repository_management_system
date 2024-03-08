@@ -93,17 +93,11 @@
                 label.textContent = field + ': ';
                 optionFields.appendChild(label);
     
-                if (field === 'Authors') {
-                    var select = document.createElement('select');
-                    select.name = option + '-' + field;
-                    var authors = ['Author 1', 'Author 2', 'Author 3']; 
-                    for (var j = 0; j < authors.length; j++) {
-                        var option = document.createElement('option');
-                        option.value = authors[j];
-                        option.textContent = authors[j];
-                        select.appendChild(option);
-                    }
-                    optionFields.appendChild(select);
+                if (field === 'Date') {
+                    var input = document.createElement('input');
+                    input.type = 'date';
+                    input.name = option + '-' + field;
+                    optionFields.appendChild(input);
                 } 
                 else if (field === 'Year of publication' || field === 'Year sanctioned') {
                     var selectYear = document.createElement('select');
