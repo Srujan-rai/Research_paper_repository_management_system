@@ -44,17 +44,20 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        cursor.execute("SELECT password FROM users WHERE username=%s", (username,))
-        user = cursor.fetchone()
+        if username!='':
+            cursor.execute("SELECT password FROM users WHERE username=%s", (username,))
+            user = cursor.fetchone()
 
-        if user:
-            if hashlib.sha256(password.encode()).hexdigest() == user[0]:
-                return render_template("home.html")
+            if user:
+                if hashlib.sha256(password.encode()).hexdigest() == user[0]:
+                    return render_template("home.html")
+                else:
+                    return render_template('login.html', message='Invalid password')
             else:
-                return render_template('login.html', message='Invalid password')
+                return render_template('login.html', message='Invalid username')
         else:
-            return render_template('login.html', message='Invalid username')
-
+            return render_template('login.html',message="haha, i fixed that bug hahahaha")
+        
     return render_template("login.html")
 
 
@@ -65,22 +68,33 @@ def create_user():
             new_username = request.form["new_username"]
             new_password = request.form["new_password"]
             hashed_password = hashlib.sha256(new_password.encode()).hexdigest()
-
-            try:
-                cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (new_username, hashed_password))
-                connection.commit()
-                return redirect(url_for('login'))  
-            except mysql.connector.IntegrityError:
-                return render_template('create_user.html', message='Username already exists')
+            if new_username!='':
+                try:
+                    cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (new_username, hashed_password))
+                    connection.commit()
+                    return redirect(url_for('login'))  
+                except mysql.connector.IntegrityError:
+                    return render_template('create_user.html', message='Username already exists')
+            else:
+                return render_template('create_user.html',message="haha , i fixed that bug hahahaa")
         else:
             return render_template('create_user.html')
         
         
-        
+dummy_data = {
+    'AIML': {'Journal': 50, 'Conference': 30},
+    'CSE': {'Journal': 40, 'Conference': 20},
+    'ISE': {'Journal': 35, 'Conference': 25},
+    'EC': {'Journal': 45, 'Conference': 35},
+    'MECH': {'Journal': 55, 'Conference': 45}
+}        
 @app.route('/admin',methods=['GET','POST'])
 def admin():
-    
-    return render_template("admin.html",content="welcome to the admin")
+    if request.method == 'POST':
+        department = request.form['department']
+        data = dummy_data.get(department, {'Journal': 0, 'Conference': 0})
+        return jsonify(data)
+    return render_template("admin.html", content="Welcome to the admin")
 
 @app.route('/user',methods=['GET','POST'])
 def user():

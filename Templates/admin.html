@@ -1,20 +1,99 @@
-<!DOCTYPE>
-
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{url_for('static',filename='CSS/admin.css')}}">
-    </head>
-    <body>
-    <h1>{{content}}</h1>
-    <form action="/admin method="post">
-        <
-    
-        
-        <script src="" async defer></script>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Panel</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include any necessary CSS files -->
+    <link rel="stylesheet" href="../static/CSS/user.css">
+</head>
+<body>
+    <div class="container">
+        <h3>Admin Panel</h3>
+        <!-- Form for selecting department -->
+        <form id="departmentForm">
+            <div class="form-group">
+                <label for="departments">Select a department:</label>
+                <select id="departments" name="department">
+                    <option value="AIML">AIML</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ISE">ISE</option>
+                    <option value="EC">EC</option>
+                    <option value="MECH">MECH</option>
+                </select>
+            </div>
+            <button type="submit">Get Data</button>
+        </form>
+        <!-- Container for displaying pie chart -->
+        <div id="chartContainer">
+            <!-- Pie chart will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Include necessary JavaScript libraries -->
+    <!-- Example: jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include any JavaScript for charting libraries -->
+    <!-- Example: Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Function to make AJAX request to fetch data based on selected department
+        $('#departmentForm').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get selected department from the form
+            var department = $('#departments').val();
+
+            // Make AJAX request to backend to fetch data
+            $.ajax({
+                type: 'POST',
+                url: '/admin',
+                data: { department: department },
+                success: function(response) {
+                    // Upon successful response, display the retrieved data as a pie chart
+                    displayPieChart(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+        // Function to display data as a pie chart
+        function displayPieChart(data) {
+            var ctx = document.getElementById('chartContainer').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        data: Object.values(data),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+    </script>
+</body>
 </html>

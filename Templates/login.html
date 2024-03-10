@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Page</title>
+
+  <title>DataNest</title>
+  <link rel="icon" type="image/x-icon" href='{{url_for('static',filename='images/icon.jpeg')}}'>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,6 +20,7 @@
     h1 {
       text-align: center;
       font-size: 25px;
+      padding-top:1%;
     }
 
     form {
@@ -86,6 +89,7 @@
   </style>
 </head>
 <body>
+  <h1>DataNest</h1>
   <form action="/login" method="post">
     <h1>LogIn</h1>
     <input type="text" name="username" placeholder="Username">
