@@ -81,21 +81,25 @@ def create_user():
             return render_template('create_user.html')
         
         
-dummy_data = {
-    'AIML': {'Journal': 50, 'Conference': 30},
-    'CSE': {'Journal': 40, 'Conference': 20},
-    'ISE': {'Journal': 35, 'Conference': 25},
-    'EC': {'Journal': 45, 'Conference': 35},
-    'MECH': {'Journal': 55, 'Conference': 45}
-}        
+       
 @app.route('/admin',methods=['GET','POST'])
 def admin():
     if request.method == 'POST':
+        counts=[]
         department = request.form['department']
-        data = dummy_data.get(department, {'Journal': 0, 'Conference': 0})
-        return jsonify(data)
-    return render_template("admin.html", content="Welcome to the admin")
-
+        department_id_value=department_id.get(department,None)
+        tables = ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWORKSHOPSEMINAR', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject']
+        for table in tables:
+            cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE DEPARTMENT_ID=%s",(department_id_value,))
+            count=cursor.fetchone()
+            counts.append(count[0])
+        print(counts,department_id_value)
+        return render_template('admin.html',counts=[1,1,1,1,1,1,1,1,1,1,1,1,1])
+    
+    else:
+        return render_template('admin.html')
+            
+            
 @app.route('/user',methods=['GET','POST'])
 def user():
     if request.method == "POST":

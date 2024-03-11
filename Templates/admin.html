@@ -3,97 +3,64 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Panel</title>
+    <title>Admin</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Include any necessary CSS files -->
-    <link rel="stylesheet" href="../static/CSS/user.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h3>Admin Panel</h3>
-        <!-- Form for selecting department -->
-        <form id="departmentForm">
-            <div class="form-group">
-                <label for="departments">Select a department:</label>
-                <select id="departments" name="department">
-                    <option value="AIML">AIML</option>
-                    <option value="CSE">CSE</option>
-                    <option value="ISE">ISE</option>
-                    <option value="EC">EC</option>
-                    <option value="MECH">MECH</option>
-                </select>
-            </div>
-            <button type="submit">Get Data</button>
-        </form>
-        <!-- Container for displaying pie chart -->
-        <div id="chartContainer">
-            <!-- Pie chart will be displayed here -->
-        </div>
-    </div>
-
-    <!-- Include necessary JavaScript libraries -->
-    <!-- Example: jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Include any JavaScript for charting libraries -->
-    <!-- Example: Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <form action="/admin" method="POST" id="optionForm">
+        <label for="departments">Choose a department:</label>
+        <select id="departments" name="department">
+            <option value="AIML">AIML</option>
+            <option value="CSE">CSE</option>
+            <option value="ISE">ISE</option>
+            <option value="EC">EC</option>
+            <option value="MECH">MECH</option>
+        </select>
+        <button type="submit" class="login-button">Submit</button>
+    </form>
+    <canvas id="myChart" width="400" height="400"></canvas>
 
     <script>
-        // Function to make AJAX request to fetch data based on selected department
-        $('#departmentForm').submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Get selected department from the form
-            var department = $('#departments').val();
-
-            // Make AJAX request to backend to fetch data
-            $.ajax({
-                type: 'POST',
-                url: '/admin',
-                data: { department: department },
-                success: function(response) {
-                    // Upon successful response, display the retrieved data as a pie chart
-                    displayPieChart(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
-
-        // Function to display data as a pie chart
-        function displayPieChart(data) {
-            var ctx = document.getElementById('chartContainer').getContext('2d');
-            var myPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: Object.keys(data),
-                    datasets: [{
-                        data: Object.values(data),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'
-                        ],
-                        borderWidth: 1
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWorkshopSeminarAttendedByFaculty', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject'],
+                datasets: [{
+                    label: 'Counts',
+                    data: [
+                        {{counts[0]}}, 
+                        {{counts[1]}}, 
+                        {{counts[2]}}, 
+                        {{counts[3]}}, 
+                        {{counts[4]}}, 
+                        {{counts[5]}}, 
+                        {{counts[6]}}, 
+                        {{counts[7]}}, 
+                        {{counts[8]}}, 
+                        {{counts[9]}}, 
+                        {{counts[10]}}, 
+                        {{counts[11]}}, 
+                        {{counts[12]}}
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-        }
+                responsive: false
+            }
+        });
     </script>
 </body>
 </html>

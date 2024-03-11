@@ -93,7 +93,7 @@
                 label.textContent = field + ': ';
                 optionFields.appendChild(label);
     
-                if (field === 'Date') {
+                if (field === 'Date' || field === 'Date of sanction') {
                     var input = document.createElement('input');
                     input.type = 'date';
                     input.name = option + '-' + field;
