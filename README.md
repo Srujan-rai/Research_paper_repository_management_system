@@ -1,2 +1,1 @@
-# Research_paper_repository_management_system....
-# using flask framework and mysql database
+#Research paper repository

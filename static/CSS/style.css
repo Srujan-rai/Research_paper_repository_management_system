@@ -1,9 +1,14 @@
 body{
     background-color: #202020;
-    background-image: url('');
+    background-image: url('../images/bc6.jpg');
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
-    margin: 0;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    
+
 }
 h2{
     text-align: center;

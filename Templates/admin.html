@@ -1,18 +1,66 @@
-<!DOCTYPE>
-
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{url_for('static',filename='CSS/admin.css')}}">
-    </head>
-    <body>
-    <h1>{{content}}</h1>
-    
-        
-        <script src="" async defer></script>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <form action="/admin" method="POST" id="optionForm">
+        <label for="departments">Choose a department:</label>
+        <select id="departments" name="department">
+            <option value="AIML">AIML</option>
+            <option value="CSE">CSE</option>
+            <option value="ISE">ISE</option>
+            <option value="EC">EC</option>
+            <option value="MECH">MECH</option>
+        </select>
+        <button type="submit" class="login-button">Submit</button>
+    </form>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWorkshopSeminarAttendedByFaculty', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject'],
+                datasets: [{
+                    label: 'Counts',
+                    data: [
+                        {{counts[0]}}, 
+                        {{counts[1]}}, 
+                        {{counts[2]}}, 
+                        {{counts[3]}}, 
+                        {{counts[4]}}, 
+                        {{counts[5]}}, 
+                        {{counts[6]}}, 
+                        {{counts[7]}}, 
+                        {{counts[8]}}, 
+                        {{counts[9]}}, 
+                        {{counts[10]}}, 
+                        {{counts[11]}}, 
+                        {{counts[12]}}
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive: false
+            }
+        });
+    </script>
+</body>
 </html>
