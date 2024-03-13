@@ -7,8 +7,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../static/CSS/admin.css">
+
 </head>
 <body>
+    <h1>DataNest</h1>
     <form action="/admin" method="POST" id="optionForm">
         <label for="departments">Choose a department:</label>
         <select id="departments" name="department">
@@ -23,6 +26,7 @@
     <canvas id="myChart" width="400" height="400"></canvas>
 
     <script>
+        var counts = [{{ counts | safe }}];  
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -30,21 +34,7 @@
                 labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWorkshopSeminarAttendedByFaculty', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject'],
                 datasets: [{
                     label: 'Counts',
-                    data: [
-                        {{counts[0]}}, 
-                        {{counts[1]}}, 
-                        {{counts[2]}}, 
-                        {{counts[3]}}, 
-                        {{counts[4]}}, 
-                        {{counts[5]}}, 
-                        {{counts[6]}}, 
-                        {{counts[7]}}, 
-                        {{counts[8]}}, 
-                        {{counts[9]}}, 
-                        {{counts[10]}}, 
-                        {{counts[11]}}, 
-                        {{counts[12]}}
-                    ],
+                    data: counts,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1

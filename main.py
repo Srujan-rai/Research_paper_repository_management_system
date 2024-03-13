@@ -82,20 +82,19 @@ def create_user():
         
         
        
-@app.route('/admin',methods=['GET','POST'])
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
-        counts=[]
+        counts = []
         department = request.form['department']
-        department_id_value=department_id.get(department,None)
+        department_id_value = department_id.get(department, None)
         tables = ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWORKSHOPSEMINAR', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject']
         for table in tables:
-            cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE DEPARTMENT_ID=%s",(department_id_value,))
-            count=cursor.fetchone()
+            cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE DEPARTMENT_ID=%s", (department_id_value,))
+            count = cursor.fetchone()
             counts.append(count[0])
-        print(counts,department_id_value)
-        return render_template('admin.html',counts=[1,1,1,1,1,1,1,1,1,1,1,1,1])
-    
+        print(counts, department_id_value)
+        return render_template('admin.html', counts=','.join(map(str, counts)))  
     else:
         return render_template('admin.html')
             
