@@ -85,7 +85,7 @@ def create_user():
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
-        if 'department' in request.form:  # Process department form
+        if 'department' in request.form: 
             department = request.form['department']
             department_id_value = department_id.get(department, None)
             tables = ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWORKSHOPSEMINAR', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject']
@@ -96,7 +96,7 @@ def admin():
                 counts.append(count[0])
             return render_template('admin.html', counts=','.join(map(str, counts)), selected_table=None)
 
-        elif 'info' in request.form:  # Process information type form
+        elif 'info' in request.form: 
             info_type = request.form['info']
             cursor.execute(f"SELECT * FROM {info_type}")
             data = cursor.fetchall()
