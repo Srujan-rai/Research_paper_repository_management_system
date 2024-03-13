@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../static/CSS/admin.css">
-
 </head>
 <body>
     <h1>DataNest</h1>
@@ -23,6 +22,8 @@
         </select>
         <button type="submit" class="login-button">Submit</button>
     </form>
+
+    {% if counts %}
     <canvas id="myChart" width="400" height="400"></canvas>
 
     <script>
@@ -52,5 +53,171 @@
             }
         });
     </script>
+    {% endif %}
+
+    <form action="/admin" method="POST" id="infoForm">
+        <label for="info">Choose information type:</label>
+        <select id="info" name="info">
+            <option value="Journal">Journal</option>
+            <option value="Conference">Conference</option>
+            <option value="BookChapter">Book Chapter</option>
+            <option value="FundedResearchProject">Funded Research Project</option>
+            <option value="ResearchProposalSubmitted">Research Proposal Submitted</option>
+            <option value="Consultancy">Consultancy</option>
+            <option value="ProductDevelopment">Product Development</option>
+            <option value="Patent">Patent</option>
+            <option value="FDPWorkshopSeminarAttendedByFaculty">FDP/Workshop/Seminar Attended by Faculty</option>
+            <option value="MOUCS">MOUCS / Swayam / Coursera any other certification courses</option>
+            <option value="AchievementsAndAwards">Achievements and Awards</option>
+            <option value="MOUS">MOUS</option>
+            <option value="FundedStudentProject">Funded Student Project</option>
+        </select>
+        <button type="submit" class="login-button">Submit</button>
+    </form>
+
+    {% if data %}
+    <h2>{{ selected_table }}</h2>
+    <table>
+        <thead>
+            <tr>
+
+                {% if selected_table == "Journal" %}
+
+                <th>Department ID</th>
+                <th>Authors</th>
+                <th>Year of Publication</th>
+                <th>Title</th>
+                <th>Journal Name</th>
+                <th>Volume & Page Number</th>
+                <th>ISSN</th>
+                <th>Impact Factor</th>
+
+                {% elif selected_table == "Conference" %}
+                
+                <th>Department ID</th>
+                <th>Year of publication</th>
+                <th>author</th>
+                <th>Title</th>
+                <th>Conference Name</th>
+                <th>Volume & Page Number</th>
+                <th>Organized by</th>
+                <th>place of conference</th>
+
+                {% elif selected_table == "BookChapter" %}
+                <th>Department ID</th>
+                <th>Year of publication</th>
+                <th>author</th>
+                <th>Chapter Title</th>
+                <th>Book Title</th>
+                <th>Publisher</th>
+                <th>ISSN</th>
+
+                {% elif selected_table == "FundedResearchProject" %}
+                <th>Department ID</th>
+                <th>Year Sanctioned</th>
+                <th>Principal investigator</th>
+                <th>COPI</th>
+                <th>project title</th>
+                <th>Funding agency</th>
+                <th>Amount Rs</th>
+                <th>Status </th>
+                {% elif selected_table == "ResearchProposalSubmitted" %}
+                <th>Department ID</th>
+                <th>Date of sanction</th>
+                <th>Principal investigator</th>
+                <th>COPI</th>
+                <th>Title</th>
+                <th>Funding agencies</th>
+                <th>Amount applied</th>
+                <th>Status</th>
+                {% elif selected_table == "Consultancy" %}
+                <th>Department ID</th>
+                <th>Amount Sanctioned</th>
+                <th>Principal investigation</th>
+                <th>COPI</th>
+                <th>Title</th>
+                <th>Agency</th>
+                <th>Year</th>
+                <th>Type</th>
+                {% elif selected_table == "ProductDevelopment" %}
+                <th>Department ID</th>
+                <th>Product Type</th>
+                <th>Product Description</th>
+                <th>Area of application</th>
+                <th>Sponsoring/Funding
+                </th>
+                <th>Faculty Mentor Name</th>
+                <th>Student Name</th>
+                <th>Status</th>
+                {% elif selected_table == "Patent" %}
+                <th>Department ID</th>
+                <th>Year of publication</th>
+                <th>Principal investigation</th>
+                <th>Patent number</th>
+                <th>Title </th>
+                <th>Indian/international</th>
+                <th>Status
+                </th>
+
+                {% elif selected_table == "FDPWorkshopSeminarAttendedByFaculty" %}
+                <th>Department ID</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Duration</th>
+                <th>Coordination</th>
+                <th>Organizer</th>
+                <th>faculty name</th>
+
+                {% elif selected_table == "MOUCS" %}
+                <th>Department ID</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>organization_name</th>
+                <th>Type of Mou</th>
+                <th>Outcomes</th>
+                <th>Faculty incharge</th>
+
+                {% elif selected_table == "AchievementsAndAwards" %}
+                <th>Department ID</th>
+                <th>Date</th>
+                <th>Event name</th>
+                <th>Organizer</th>
+                <th>Mentor Name</th>
+                <th>Names of the Faculty</th>
+                <th>Type of participation</th>
+                <th>Outcomes</th>
+                {% elif selected_table == "MOUS" %}
+                <th>Department ID</th>
+                <th>Date</th>
+                <th>Major Area </th>
+                <th>Topic</th>
+                <th>Duration</th>
+                <th>Certified by</th>
+                <th>Attended by Faculty</th>
+                <th>Attended by Student</th>
+                {% elif selected_table == "FundedStudentProject" %}
+                <th>Department ID</th>
+                <th>Year Sanctioned</th>
+                <th>Supervison</th>
+                <th>Co-Supervison</th>
+                <th>Student Name</th>
+                <th>Project Title</th>
+                <th>Funding Agencies</th>
+                <th>Amount</th>
+                <th>Status</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                {% for item in row %}
+                <td>{{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
 </body>
 </html>

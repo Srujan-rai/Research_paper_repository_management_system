@@ -85,18 +85,26 @@ def create_user():
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
-        counts = []
-        department = request.form['department']
-        department_id_value = department_id.get(department, None)
-        tables = ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWORKSHOPSEMINAR', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject']
-        for table in tables:
-            cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE DEPARTMENT_ID=%s", (department_id_value,))
-            count = cursor.fetchone()
-            counts.append(count[0])
-        print(counts, department_id_value)
-        return render_template('admin.html', counts=','.join(map(str, counts)))  
-    else:
-        return render_template('admin.html')
+        if 'department' in request.form:  # Process department form
+            department = request.form['department']
+            department_id_value = department_id.get(department, None)
+            tables = ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWORKSHOPSEMINAR', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject']
+            counts = []
+            for table in tables:
+                cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE DEPARTMENT_ID=%s", (department_id_value,))
+                count = cursor.fetchone()
+                counts.append(count[0])
+            return render_template('admin.html', counts=','.join(map(str, counts)), selected_table=None)
+
+        elif 'info' in request.form:  # Process information type form
+            info_type = request.form['info']
+            cursor.execute(f"SELECT * FROM {info_type}")
+            data = cursor.fetchall()
+
+            print(data)
+            return render_template('admin.html', data=data, selected_table=info_type)
+
+    return render_template('admin.html')
             
             
 @app.route('/user',methods=['GET','POST'])
