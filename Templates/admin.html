@@ -11,15 +11,18 @@
 </head>
 <body>
     <h1>DataNest</h1>
+    <div id="admin-section">
     <form action="/admin" method="POST" id="optionForm">
-        <label for="departments">Choose a department:</label>
-        <select id="departments" name="department">
-            <option value="AIML">AIML</option>
-            <option value="CSE">CSE</option>
-            <option value="ISE">ISE</option>
-            <option value="EC">EC</option>
-            <option value="MECH">MECH</option>
-        </select>
+        <div>
+            <label for="departments">Choose a department:</label>
+            <select id="departments" name="department">
+                <option value="AIML">AIML</option>
+                <option value="CSE">CSE</option>
+                <option value="ISE">ISE</option>
+                <option value="EC">EC</option>
+                <option value="MECH">MECH</option>
+            </select>
+        </div>
         <button type="submit" class="login-button">Submit</button>
     </form>
 
@@ -36,8 +39,8 @@
                 datasets: [{
                     label: 'Counts',
                     data: counts,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1
                 }]
             },
@@ -56,7 +59,8 @@
     {% endif %}
 
     <form action="/admin" method="POST" id="infoForm">
-        <label for="info">Choose information type:</label>
+        <div>
+            <label for="info">Choose information type:</label>
         <select id="info" name="info">
             <option value="Journal">Journal</option>
             <option value="Conference">Conference</option>
@@ -72,6 +76,7 @@
             <option value="MOUS">MOUS</option>
             <option value="FundedStudentProject">Funded Student Project</option>
         </select>
+        </div>
         <button type="submit" class="login-button">Submit</button>
     </form>
 
@@ -219,5 +224,6 @@
         </tbody>
     </table>
     {% endif %}
+</div>
 </body>
 </html>

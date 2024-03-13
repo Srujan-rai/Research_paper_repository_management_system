@@ -1,6 +1,6 @@
 body{
     background-color: #202020;
-    background-image: url('../images/bc6.jpg');
+    background-image: url('../images/bc8.jpg');
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
 
@@ -13,6 +13,7 @@ body{
 h2{
     text-align: center;
     margin: 0;
+    color: #000066;
     width: max-screen;
     position: relative;
     top: 20px;

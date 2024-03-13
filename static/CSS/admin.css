@@ -1,6 +1,6 @@
 body{
     background-color: #202020;
-    background-image: url('../images/bc6.jpg');
+    background-image: url('../images/bc7.jpg');
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
     background-repeat: no-repeat;
@@ -12,3 +12,60 @@ body{
     text-align: center;
     font-size: medium;
 }
+
+#admin-section{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 100px;
+    font-size: 1.5rem;
+}
+
+#optionForm{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    align-items: center;
+}
+
+#infoForm{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    align-items: center;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+    font-size: 1rem;
+  }
+
+  select{
+    background-color: #ededed;
+    color: #000;
+    border-color: #575757;
+    width: max-content;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  option{
+    background-color: #ededed;
+    color: #000;
+    font-size: 1rem;
+  }
+
+  #myChart{
+    align-self: center;
+  }
+
+  table{
+    font-size: 1rem;
+  }
