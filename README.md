@@ -59,4 +59,4 @@ That's it you are good to go! Looking forward to your contributions.
 <br />
 <br />
 
-**Thank you for using Rudraksh!**
+**Thank you for using DataNest!**
