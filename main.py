@@ -97,12 +97,32 @@ def admin():
             return render_template('admin.html', counts=','.join(map(str, counts)), selected_table=None)
 
         elif 'info' in request.form: 
-            info_type = request.form['info']
-            filter_option = request.form['filter']
-            text_input_value = request.form['text-input']
-            
-            cursor.execute(f"SELECT * FROM {info_type}")
-            data = cursor.fetchall()
+            info_type = request.form['info'].upper()
+            filter_option = request.form['filter'].upper()
+            text_input_value = request.form['text-input'].upper()
+            if filter_option=="ALL":
+                cursor.execute(f"SELECT * FROM {info_type}")   
+                data = cursor.fetchall()
+            else:
+                query = f"SELECT * FROM {info_type} WHERE {filter_option} = %s"
+                cursor.execute(query, (text_input_value,))
+                data = cursor.fetchall()
+            department_id={
+                 0: "AIML",
+                 1: "CSE",
+                 2: "ISE",
+                 3: "EC",
+                 4: "MECH"
+                        }
+            for i, tup in enumerate(data):
+                department_id_value = tup[0]
+                department_name = department_id.get(department_id_value)
+                modified_tup = (department_name,) + tup[1:]  
+                data[i] = modified_tup  
+
+            print(data)
+                
+            print(info_type)
             print(filter_option)
             print(text_input_value)
             print(data)

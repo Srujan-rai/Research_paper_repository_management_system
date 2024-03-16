@@ -148,7 +148,7 @@
 
                     switch(selectedOption) {
                         case 'Journal':
-                            filterOptions = ['All','Department','Authors', 'Year of Publication', 'Title', 'Journal Name', 'Volume & Page Number', 'ISSN', 'Impact Factor'];
+                            filterOptions = ['All','Department','Authors', 'Year_of_Publication', 'Title', 'Journal_Name', 'Volume_Page_Number', 'ISSN', 'Impact_Factor'];
                             break;
                         case 'Conference':
                             filterOptions = ['All','Department','Year of Publication', 'Author', 'Title', 'Conference Name', 'Volume & Page Count', 'Organized By', 'Place of Conference'];
@@ -226,9 +226,9 @@
         <thead>
             <tr>
 
-                {% if selected_table == "Journal" %}
+                {% if selected_table == "JOURNAL" %}
 
-                <th>Department ID</th>
+                <th>Department</th>
                 <th>Authors</th>
                 <th>Year of Publication</th>
                 <th>Title</th>
@@ -237,9 +237,9 @@
                 <th>ISSN</th>
                 <th>Impact Factor</th>
 
-                {% elif selected_table == "Conference" %}
+                {% elif selected_table == "CONFERENCE" %}
                 
-                <th>Department ID</th>
+                <th>Department</th>
                 <th>Year of publication</th>
                 <th>author</th>
                 <th>Title</th>
@@ -248,8 +248,8 @@
                 <th>Organized by</th>
                 <th>place of conference</th>
 
-                {% elif selected_table == "BookChapter" %}
-                <th>Department ID</th>
+                {% elif selected_table == "BOOKCHAPTER" %}
+                <th>Department</th>
                 <th>Year of publication</th>
                 <th>author</th>
                 <th>Chapter Title</th>
@@ -257,8 +257,8 @@
                 <th>Publisher</th>
                 <th>ISSN</th>
 
-                {% elif selected_table == "FundedResearchProject" %}
-                <th>Department ID</th>
+                {% elif selected_table == "FUNDEDRESEARCHPROJECT" %}
+                <th>Department</th>
                 <th>Year Sanctioned</th>
                 <th>Principal investigator</th>
                 <th>COPI</th>
@@ -266,8 +266,8 @@
                 <th>Funding agency</th>
                 <th>Amount Rs</th>
                 <th>Status </th>
-                {% elif selected_table == "ResearchProposalSubmitted" %}
-                <th>Department ID</th>
+                {% elif selected_table == "RESEARCHPROPOSALSUBMITTED" %}
+                <th>Department</th>
                 <th>Date of sanction</th>
                 <th>Principal investigator</th>
                 <th>COPI</th>
@@ -275,8 +275,8 @@
                 <th>Funding agencies</th>
                 <th>Amount applied</th>
                 <th>Status</th>
-                {% elif selected_table == "Consultancy" %}
-                <th>Department ID</th>
+                {% elif selected_table == "CONSULTANCY" %}
+                <th>Department</th>
                 <th>Amount Sanctioned</th>
                 <th>Principal investigation</th>
                 <th>COPI</th>
@@ -284,8 +284,8 @@
                 <th>Agency</th>
                 <th>Year</th>
                 <th>Type</th>
-                {% elif selected_table == "ProductDevelopment" %}
-                <th>Department ID</th>
+                {% elif selected_table == "PRODUCTDEVELOPMENT" %}
+                <th>Department</th>
                 <th>Product Type</th>
                 <th>Product Description</th>
                 <th>Area of application</th>
@@ -294,8 +294,8 @@
                 <th>Faculty Mentor Name</th>
                 <th>Student Name</th>
                 <th>Status</th>
-                {% elif selected_table == "Patent" %}
-                <th>Department ID</th>
+                {% elif selected_table == "PATENT" %}
+                <th>Department</th>
                 <th>Year of publication</th>
                 <th>Principal investigation</th>
                 <th>Patent number</th>
@@ -304,8 +304,8 @@
                 <th>Status
                 </th>
 
-                {% elif selected_table == "FDPWorkshopSeminarAttendedByFaculty" %}
-                <th>Department ID</th>
+                {% elif selected_table == "FDPWORKSHOPSEMINARATTENDEDBYFACULTY" %}
+                <th>Department</th>
                 <th>Date</th>
                 <th>Topic</th>
                 <th>Duration</th>
@@ -314,7 +314,7 @@
                 <th>faculty name</th>
 
                 {% elif selected_table == "MOUCS" %}
-                <th>Department ID</th>
+                <th>Department</th>
                 <th>Date</th>
                 <th>Duration</th>
                 <th>organization_name</th>
@@ -322,8 +322,8 @@
                 <th>Outcomes</th>
                 <th>Faculty incharge</th>
 
-                {% elif selected_table == "AchievementsAndAwards" %}
-                <th>Department ID</th>
+                {% elif selected_table == "ACHIEVEMENTSANDAWARDS" %}
+                <th>Department</th>
                 <th>Date</th>
                 <th>Event name</th>
                 <th>Organizer</th>
@@ -332,7 +332,7 @@
                 <th>Type of participation</th>
                 <th>Outcomes</th>
                 {% elif selected_table == "MOUS" %}
-                <th>Department ID</th>
+                <th>Department</th>
                 <th>Date</th>
                 <th>Major Area </th>
                 <th>Topic</th>
@@ -340,8 +340,8 @@
                 <th>Certified by</th>
                 <th>Attended by Faculty</th>
                 <th>Attended by Student</th>
-                {% elif selected_table == "FundedStudentProject" %}
-                <th>Department ID</th>
+                {% elif selected_table == "FUNDEDSTUDENTPROJECT" %}
+                <th>Department</th>
                 <th>Year Sanctioned</th>
                 <th>Supervison</th>
                 <th>Co-Supervison</th>
