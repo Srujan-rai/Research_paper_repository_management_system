@@ -98,9 +98,13 @@ def admin():
 
         elif 'info' in request.form: 
             info_type = request.form['info']
+            filter_option = request.form['filter']
+            text_input_value = request.form['text-input']
+            
             cursor.execute(f"SELECT * FROM {info_type}")
             data = cursor.fetchall()
-
+            print(filter_option)
+            print(text_input_value)
             print(data)
             return render_template('admin.html', data=data, selected_table=info_type)
 

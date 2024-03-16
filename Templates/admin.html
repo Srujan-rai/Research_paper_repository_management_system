@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin</title>
+    <title>DataNest</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.jpeg') }}">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -15,123 +16,209 @@
         <div class="red-dot"></div>
     </div>
     <div id="admin-section">
-    <form action="/admin" method="POST" id="optionForm">
-        <div>
-            <label for="departments">Choose a department:</label>
-            <select id="departments" name="department">
-                <option value="AIML">AIML</option>
-                <option value="CSE">CSE</option>
-                <option value="ISE">ISE</option>
-                <option value="EC">EC</option>
-                <option value="MECH">MECH</option>
-            </select>
+        <form action="/admin" method="POST" id="optionForm">
+            <div>
+                <label for="departments">Choose a department:</label>
+                <select id="departments" name="department">
+                    <option value="AIML">AIML</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ISE">ISE</option>
+                    <option value="EC">EC</option>
+                    <option value="MECH">MECH</option>
+                </select>
+            </div>
+            <button type="submit" class="login-button">Submit</button>
+        </form>
+
+        {% if counts %}
+        <div style="display: flex; justify-content: space-around;">
+            <canvas id="barChart" width="400" height="400"></canvas>
+            <canvas id="pieChart" width="400" height="400"></canvas>
         </div>
-        <button type="submit" class="login-button">Submit</button>
-    </form>
 
-    {% if counts %}
-    <div style="display: flex; justify-content: space-around;">
-        <canvas id="barChart" width="400" height="400"></canvas>
-        <canvas id="pieChart" width="400" height="400"></canvas>
-    </div>
+        <script>
+            var counts = [{{ counts | safe }}];  
+            var ctxBar = document.getElementById('barChart').getContext('2d');
+            var ctxPie = document.getElementById('pieChart').getContext('2d');
 
-    <script>
-        var counts = [{{ counts | safe }}];  
-        var ctxBar = document.getElementById('barChart').getContext('2d');
-        var ctxPie = document.getElementById('pieChart').getContext('2d');
-
-        var barChart = new Chart(ctxBar, {
-            type: 'bar',
-            data: {
-                labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'Workshop/SeminarAttended', 'MOUCS', 'Achievements/Awards', 'MOUS', 'FundedStudentProject'],
-                datasets: [{
-                    label: 'Counts',
-                    data: counts,
-                    backgroundColor: 'rgba(128, 128, 128, 0.4)',
-                    borderColor: 'rgba(255, 255, 255, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
+            var barChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'Workshop/SeminarAttended', 'MOUCS', 'Achievements/Awards', 'MOUS', 'FundedStudentProject'],
+                    datasets: [{
+                        label: 'Counts',
+                        data: counts,
+                        backgroundColor: 'rgba(128, 128, 128, 0.4)',
+                        borderColor: 'rgba(255, 255, 255, 1)',
+                        borderWidth: 1
                     }]
                 },
-                responsive: false
-            }
-        });
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: false
+                }
+            });
 
-        var pieChart = new Chart(ctxPie, {
-            type: 'pie',
-            data: {
-                labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'Workshop/SeminarAttended', 'MOUCS', 'Achievements/Awards', 'MOUS', 'FundedStudentProject'],
-                datasets: [{
-                    label: 'Counts',
-                    data: counts,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 99, 132, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 99, 132, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: false
-            }
-        });
-    </script>
-    {% endif %}
+            var pieChart = new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'Workshop/SeminarAttended', 'MOUCS', 'Achievements/Awards', 'MOUS', 'FundedStudentProject'],
+                    datasets: [{
+                        label: 'Counts',
+                        data: counts,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false
+                }
+            });
+            
+        </script>
+        {% endif %}
 
-    <form action="/admin" method="POST" id="infoForm">
-        <div>
-            <label for="info">Choose Sub options:</label>
-        <select id="info" name="info">
-            <option value="Journal">Journal</option>
-            <option value="Conference">Conference</option>
-            <option value="BookChapter">Book Chapter</option>
-            <option value="FundedResearchProject">Funded Research Project</option>
-            <option value="ResearchProposalSubmitted">Research Proposal Submitted</option>
-            <option value="Consultancy">Consultancy</option>
-            <option value="ProductDevelopment">Product Development</option>
-            <option value="Patent">Patent</option>
-            <option value="FDPWorkshopSeminarAttendedByFaculty">FDP/Workshop/Seminar Attended by Faculty</option>
-            <option value="MOUCS">MOUCS / Swayam / Coursera any other certification courses</option>
-            <option value="AchievementsAndAwards">Achievements and Awards</option>
-            <option value="MOUS">MOUS</option>
-            <option value="FundedStudentProject">Funded Student Project</option>
-        </select>
-        </div>
-        <button type="submit" class="login-button">Submit</button>
-    </form>
+        <form action="/admin" method="POST" id="infoForm">
+            <div>
+                <label for="info">Choose Sub options:</label>
+                <select id="info" name="info">
+                    <option value="Journal">Journal</option>
+                    <option value="Conference">Conference</option>
+                    <option value="BookChapter">Book Chapter</option>
+                    <option value="FundedResearchProject">Funded Research Project</option>
+                    <option value="ResearchProposalSubmitted">Research Proposal Submitted</option>
+                    <option value="Consultancy">Consultancy</option>
+                    <option value="ProductDevelopment">Product Development</option>
+                    <option value="Patent">Patent</option>
+                    <option value="FDPWorkshopSeminarAttendedByFaculty">FDP/Workshop/Seminar Attended by Faculty</option>
+                    <option value="MOUCS">MOUCS / Swayam / Coursera any other certification courses</option>
+                    <option value="AchievementsAndAwards">Achievements and Awards</option>
+                    <option value="MOUS">MOUS</option>
+                    <option value="FundedStudentProject">Funded Student Project</option>
+                </select>
+            </div>
+
+            <div id="filter-container"></div>
+
+            <div id="text-input-container"></div>
+
+            <button type="submit" class="login-button">Submit</button>
+            <div id="additional-filter-container"></div>
+        </form>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                function generateFilterDropdown(selectedOption) {
+                    var filterOptions = {};
+
+                    switch(selectedOption) {
+                        case 'Journal':
+                            filterOptions = ['All','Department','Authors', 'Year of Publication', 'Title', 'Journal Name', 'Volume & Page Number', 'ISSN', 'Impact Factor'];
+                            break;
+                        case 'Conference':
+                            filterOptions = ['All','Department','Year of Publication', 'Author', 'Title', 'Conference Name', 'Volume & Page Count', 'Organized By', 'Place of Conference'];
+                            break;
+                        case 'BookChapter':
+                            filterOptions = ['All','Department','Year of publication', 'Authors', 'Chapter title', 'Book title', 'Publisher', 'ISSN'];
+                            break;
+                        case 'FundedResearchProject':
+                            filterOptions = ['All','Department','Year sanctioned', 'Principal investigation', 'COPI', 'Title of the project', 'Funding Agencies', 'Amount RS', 'Status'];
+                            break;
+                        case 'ResearchProposalSubmitted':
+                            filterOptions = ['All','Department','Date of sanction', 'Principal investigation', 'COPI', 'Title', 'Funding Agencies', 'Amount applied', 'Status'];
+                            break;
+                        case 'Consultancy':
+                            filterOptions = ['All','Department','Amount Sanctioned', 'Principal investigation', 'COPI', 'Title', 'Agency', 'Year', 'Type'];
+                            break;
+                        case 'ProductDevelopment':
+                            filterOptions = ['All','Department','Product Type', 'Product Description', 'Area of application', 'Sponsoring/Funding agency', 'Faculty Name/Mentor name', 'Student name', 'Status'];
+                            break;
+                        case 'Patent':
+                            filterOptions = ['All','Department','Year of publication', 'Principal investigation', 'Patent number', 'Title', 'Indian/international', 'Status'];
+                            break;
+                        case 'FDPWorkshopSeminarAttendedByFaculty':
+                            filterOptions = ['All','Department','Date', 'Topic', 'Duration', 'Dept', 'Coordination', 'Organizer', 'Faculty Name'];
+                            break;
+                        case 'MOUCS':
+                            filterOptions = ['All','Department','Date', 'Major area', 'Topic', 'Duration', 'Certified by', 'Faculty Name/USN', 'Student Name/USN'];
+                            break;
+                        case 'AchievementsAndAwards':
+                            filterOptions = ['All','Department','Date', 'Event name', 'Organizer', 'Mentor name', 'Names of the faculty', 'Type of participation', 'Outcomes'];
+                            break;
+                        case 'MOUS':
+                            filterOptions = ['All','Department','Date', 'Duration', 'Name of the organization', 'Type of MOU', 'Outcomes', 'Faculty incharge'];
+                            break;
+                        case 'FundedStudentProject':
+                            filterOptions = ['All','Department','Year sanctioned', 'Supervison', 'Cosupervision', 'Student Name', 'Title of the project', 'Funding Agencies', 'Amount', 'Status'];
+                            break;
+                    }
+
+                    var filterDropdownHTML = '<label for="filter">Choose a filter:</label><select id="filter" name="filter">';
+                    filterOptions.forEach(function(option) {
+                        filterDropdownHTML += '<option value="' + option + '">' + option + '</option>';
+                    });
+                    filterDropdownHTML += '</select>';
+
+                    document.getElementById('filter-container').innerHTML = filterDropdownHTML;
+                }
+
+                document.getElementById('info').addEventListener('change', function() {
+                    var selectedOption = this.value;
+                    generateFilterDropdown(selectedOption);
+
+ 
+                    document.getElementById('text-input-container').innerHTML = '';
+                });
+
+                function generateTextInput(selectedFilter) {
+                    var textInputHTML = '<label for="text-input">Enter ' + selectedFilter + ':</label><input type="text" id="text-input" name="text-input">';
+
+                    document.getElementById('text-input-container').innerHTML = textInputHTML;
+                }
+
+                document.addEventListener('change', function(event) {
+                    if (event.target && event.target.id === 'filter') {
+                        var selectedFilter = event.target.value;
+                        generateTextInput(selectedFilter);
+                    }
+                });
+            });
+        </script>
 
     {% if data %}
     <h2 id="selected-table">{{ selected_table }}</h2>
