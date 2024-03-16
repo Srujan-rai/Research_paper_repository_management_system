@@ -107,7 +107,8 @@ def admin():
                 query = f"SELECT * FROM {info_type} WHERE {filter_option} = %s"
                 cursor.execute(query, (text_input_value,))
                 data = cursor.fetchall()
-            department_id={
+            
+            department_id_local={
                  0: "AIML",
                  1: "CSE",
                  2: "ISE",
@@ -116,7 +117,7 @@ def admin():
                         }
             for i, tup in enumerate(data):
                 department_id_value = tup[0]
-                department_name = department_id.get(department_id_value)
+                department_name = department_id_local.get(department_id_value)
                 modified_tup = (department_name,) + tup[1:]  
                 data[i] = modified_tup  
 
