@@ -103,6 +103,14 @@ def admin():
             if filter_option=="ALL":
                 cursor.execute(f"SELECT * FROM {info_type}")   
                 data = cursor.fetchall()
+                
+                
+            if filter_option=="DEPARTMENT":
+                department_id_value = department_id.get(text_input_value, None)
+                query = f"SELECT * FROM {info_type} WHERE DEPARTMENT_ID = %s"
+                cursor.execute(query, (department_id_value,))
+                data = cursor.fetchall()
+                
             else:
                 query = f"SELECT * FROM {info_type} WHERE {filter_option} = %s"
                 cursor.execute(query, (text_input_value,))
