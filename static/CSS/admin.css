@@ -11,10 +11,12 @@ body{
 .h1{
     text-align: center;
     font-size: medium;
+    margin-left: 10px;
 }
 
 #admin-section{
     margin-top: 100px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     row-gap: 100px;
@@ -45,7 +47,12 @@ button {
     width: fit-content;
     align-self: center;
     font-size: 1rem;
+    transition: all 0.3s;
   }
+
+button:hover{
+  box-shadow: 0px 0px 10px #ffffff94;
+}
 
   select{
     background-color: #ededed;
@@ -67,5 +74,33 @@ button {
   }
 
   table{
-    font-size: 1rem;
+    font-size: 1.3rem;
+    width: max-content;
+    text-align: center;
+    align-self: center;
+  }
+
+  th{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #selected-table{
+    align-self: center;
+  }
+
+  .red-dot{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+    transform: blink infinite;
+  }
+
+  blink
+
+  .heading-and-dot{
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
   }

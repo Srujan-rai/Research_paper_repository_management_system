@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="../static/CSS/admin.css">
 </head>
 <body>
-    <h1>DataNest</h1>
+    <div class="heading-and-dot">
+        <h1>DataNest</h1>
+        <div class="red-dot"></div>
+    </div>
     <div id="admin-section">
     <form action="/admin" method="POST" id="optionForm">
         <div>
@@ -27,19 +30,24 @@
     </form>
 
     {% if counts %}
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <div style="display: flex; justify-content: space-around;">
+        <canvas id="barChart" width="400" height="400"></canvas>
+        <canvas id="pieChart" width="400" height="400"></canvas>
+    </div>
 
     <script>
         var counts = [{{ counts | safe }}];  
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        var ctxBar = document.getElementById('barChart').getContext('2d');
+        var ctxPie = document.getElementById('pieChart').getContext('2d');
+
+        var barChart = new Chart(ctxBar, {
             type: 'bar',
             data: {
-                labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'FDPWorkshopSeminarAttendedByFaculty', 'MOUCS', 'AchievementsAndAwards', 'MOUS', 'FundedStudentProject'],
+                labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'Workshop/SeminarAttended', 'MOUCS', 'Achievements/Awards', 'MOUS', 'FundedStudentProject'],
                 datasets: [{
                     label: 'Counts',
                     data: counts,
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: 'rgba(128, 128, 128, 0.4)',
                     borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1
                 }]
@@ -55,12 +63,57 @@
                 responsive: false
             }
         });
+
+        var pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Journal', 'Conference', 'BookChapter', 'FundedResearchProject', 'ResearchProposalSubmitted', 'Consultancy', 'ProductDevelopment', 'Patent', 'Workshop/SeminarAttended', 'MOUCS', 'Achievements/Awards', 'MOUS', 'FundedStudentProject'],
+                datasets: [{
+                    label: 'Counts',
+                    data: counts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false
+            }
+        });
     </script>
     {% endif %}
 
     <form action="/admin" method="POST" id="infoForm">
         <div>
-            <label for="info">Choose information type:</label>
+            <label for="info">Choose Sub options:</label>
         <select id="info" name="info">
             <option value="Journal">Journal</option>
             <option value="Conference">Conference</option>
@@ -81,8 +134,8 @@
     </form>
 
     {% if data %}
-    <h2>{{ selected_table }}</h2>
-    <table>
+    <h2 id="selected-table">{{ selected_table }}</h2>
+    <table border="1">
         <thead>
             <tr>
 
