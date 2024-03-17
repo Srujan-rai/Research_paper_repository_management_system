@@ -100,12 +100,13 @@ def admin():
             info_type = request.form['info'].upper()
             filter_option = request.form['filter'].upper()
             text_input_value = request.form['text-input'].upper()
-            if filter_option=="ALL":
-                cursor.execute(f"SELECT * FROM {info_type}")   
-                data = cursor.fetchall()
+            
+            if filter_option == text_input_value:     
+               cursor.execute(f"SELECT * FROM {info_type}")   
+               data = cursor.fetchall()
+            
                 
-                
-            if filter_option=="DEPARTMENT":
+            elif filter_option=="DEPARTMENT":
                 department_id_value = department_id.get(text_input_value, None)
                 query = f"SELECT * FROM {info_type} WHERE DEPARTMENT_ID = %s"
                 cursor.execute(query, (department_id_value,))
