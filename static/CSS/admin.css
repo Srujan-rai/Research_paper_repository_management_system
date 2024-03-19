@@ -108,3 +108,10 @@ th {
   column-gap: 15px;
   align-items: center;
 }
+
+.button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Adjust as needed */
+}
+
