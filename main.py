@@ -11,6 +11,7 @@ department_id={
 }
 
 app = Flask(__name__)
+
 db = {
     'host': 'localhost',
     'database': 'RESEARCH_PAPER_REPO',
@@ -68,7 +69,7 @@ def create_user():
             new_username = request.form["new_username"]
             new_password = request.form["new_password"]
             hashed_password = hashlib.sha256(new_password.encode()).hexdigest()
-            if new_username!='':
+            if new_username!='' or new_username!=new_password:
                 try:
                     cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (new_username, hashed_password))
                     connection.commit()
@@ -76,11 +77,11 @@ def create_user():
                 except mysql.connector.IntegrityError:
                     return render_template('create_user.html', message='Username already exists')
             else:
-                return render_template('create_user.html',message="haha , i fixed that bug hahahaa")
+                return render_template('create_user.html',message="invalid entry!!!")
         else:
             return render_template('create_user.html')
         
-        
+            
        
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -101,6 +102,8 @@ def admin():
             filter_option = request.form['filter'].upper()
             text_input_value = request.form['text-input'].upper()
             
+            
+            
             if filter_option == text_input_value:     
                cursor.execute(f"SELECT * FROM {info_type}")   
                data = cursor.fetchall()
@@ -111,6 +114,7 @@ def admin():
                 query = f"SELECT * FROM {info_type} WHERE DEPARTMENT_ID = %s"
                 cursor.execute(query, (department_id_value,))
                 data = cursor.fetchall()
+            
                 
             else:
                 query = f"SELECT * FROM {info_type} WHERE {filter_option} = %s"

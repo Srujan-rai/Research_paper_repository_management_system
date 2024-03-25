@@ -125,7 +125,7 @@
                     <option value="Consultancy">Consultancy</option>
                     <option value="ProductDevelopment">Product Development</option>
                     <option value="Patent">Patent</option>
-                    <option value="FDPWorkshopSeminarAttendedByFaculty">FDP/Workshop/Seminar Attended by Faculty</option>
+                    <option value="FDPWorkshopSeminar">FDP/Workshop/Seminar Attended by Faculty</option>
                     <option value="MOUCS">MOUCS / Swayam / Coursera any other certification courses</option>
                     <option value="AchievementsAndAwards">Achievements and Awards</option>
                     <option value="MOUS">MOUS</option>
@@ -171,7 +171,7 @@
                         case 'Patent':
                             filterOptions = ['All','Department','Year of publication', 'Principal investigation', 'Patent number', 'Title', 'Indian/international', 'Status'];
                             break;
-                        case 'FDPWorkshopSeminarAttendedByFaculty':
+                        case 'FDPWorkshopSeminar':
                             filterOptions = ['All','Department','Date', 'Topic', 'Duration', 'Dept', 'Coordination', 'Organizer', 'Faculty Name'];
                             break;
                         case 'MOUCS':
@@ -304,7 +304,7 @@
                 <th>Status
                 </th>
 
-                {% elif selected_table == "FDPWORKSHOPSEMINARATTENDEDBYFACULTY" %}
+                {% elif selected_table == "FDPWORKSHOPSEMINAR" %}
                 <th>Department</th>
                 <th>Date</th>
                 <th>Topic</th>

@@ -115,3 +115,6 @@ th {
         margin-top: 20px; /* Adjust as needed */
 }
 
+th, td {
+  border-color: #3ae2e2;
+}
