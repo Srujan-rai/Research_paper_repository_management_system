@@ -21,6 +21,9 @@
 - Collaboration: Enable collaboration by allowing users to share papers, comment on papers, and collaborate on research projects.
 - Version Control: Implement version control to track changes to papers over time and maintain a history of revisions.
 - Integration with Academic Networks: Integrate the system with academic networking platforms like ORCID, ResearchGate, or Google Scholar for importing and exporting papers and metadata.
+- Passwords are hashed and then stored in the database for extra security
+- Mysql database in the backend for storing data
+- User friendly UI for easy data retrival and data filtering
 
 ## Technologies Used
 
