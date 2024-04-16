@@ -49,6 +49,8 @@ Then in the terminal Type :
 ```bash
 
 python main.py
+or
+python app.py
 
 ```
 
